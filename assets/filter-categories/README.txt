@@ -1,0 +1,1 @@
+Category artwork for CompactFiltersScreen.
