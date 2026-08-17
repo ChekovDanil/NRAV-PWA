@@ -1,5 +1,5 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 5.5H19L13.5 12V20.5L10.5 18.5V12L5 5.5Z" stroke="url(#accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4 5.5H20L14 12.5V20.5L10 18V12.5L4 5.5Z" stroke="url(#accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 <defs>
 <linearGradient id="accent" x1="4" y1="5" x2="20" y2="21" gradientUnits="userSpaceOnUse">
 <stop stop-color="#F1DAB0"/><stop offset=".48" stop-color="#D8AD6B"/><stop offset="1" stop-color="#A56C32"/>
