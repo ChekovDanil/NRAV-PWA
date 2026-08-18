@@ -4,11 +4,11 @@
 :HL["/NRAV-PWA/_next/static/chunks/0j2rlfxxyf649.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0syugfd7~c~jm.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/017~qizek5kw5.css","style"]
-:HL["/NRAV-PWA/_next/static/chunks/0blthm--wm-is.css","style"]
+:HL["/NRAV-PWA/_next/static/chunks/11x._2i22vb3x.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0fyv7pmqlwqep.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/125ix0s2b~2hi.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0ifk9t-pw6ix_.css","style"]
 :HL["/NRAV-PWA/assets/filter-categories/nightlife.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/active.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/concerts.webp","image",{"type":"image/webp"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"JIdaBCfV1CAHavKff6_Md"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"Tr8CA4nJHr7vsXLn6Rz_D"}
