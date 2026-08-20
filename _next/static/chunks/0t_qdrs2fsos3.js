@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,37242,t=>{"use strict";var e=t.i(85363);t.s(["useBottomSheetGesture",()=>e.default])},98113,t=>{t.n(t.i(61683))}]);
