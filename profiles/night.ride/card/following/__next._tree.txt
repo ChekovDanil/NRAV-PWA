@@ -1,4 +1,4 @@
-:HL["/NRAV-PWA/_next/static/chunks/0d86h826vzgu9.css","style"]
+:HL["/NRAV-PWA/_next/static/chunks/03olfli5zlwke.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0vn~vqmfws3~4.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0tfg5nsr_rdyw.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0w8sltt69bbjg.css","style"]
@@ -8,4 +8,4 @@
 :HL["/NRAV-PWA/assets/filter-categories/nightlife.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/active.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/concerts.webp","image",{"type":"image/webp"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profiles","param":null,"prefetchHints":0,"slots":{"children":{"name":"username","param":{"type":"d","key":"night.ride","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"card","param":null,"prefetchHints":0,"slots":{"children":{"name":"following","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"dupS-QnHZ3lb6UN6ke1SS"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"profiles","param":null,"prefetchHints":0,"slots":{"children":{"name":"username","param":{"type":"d","key":"night.ride","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"card","param":null,"prefetchHints":0,"slots":{"children":{"name":"following","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"PDRMY_yZL0N7ZzSRJWWO1"}
