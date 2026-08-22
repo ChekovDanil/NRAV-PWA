@@ -2,9 +2,9 @@
 :HL["/NRAV-PWA/_next/static/chunks/14gpl_v.f41~9.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0rgsupudjgf.b.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0qb86odkjpxc1.css","style"]
-:HL["/NRAV-PWA/_next/static/chunks/0pc-6z6oqvfm3.css","style"]
+:HL["/NRAV-PWA/_next/static/chunks/01djod5mjl8rs.css","style"]
 :HL["/NRAV-PWA/_next/static/chunks/0qhfpu6fh.z2y.css","style"]
 :HL["/NRAV-PWA/assets/filter-categories/nightlife.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/active.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/concerts.webp","image",{"type":"image/webp"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"channels","param":null,"prefetchHints":0,"slots":{"children":{"name":"channelId","param":{"type":"d","key":"channel-mountains","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"admin","param":null,"prefetchHints":0,"slots":{"children":{"name":"audience","param":null,"prefetchHints":0,"slots":{"children":{"name":"subscriber","param":null,"prefetchHints":0,"slots":{"children":{"name":"subscriberId","param":{"type":"d","key":"aigerim","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}}}}}}}},"staleTime":300,"buildId":"4E-z8I05TpWmwAYWiSbc9"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"channels","param":null,"prefetchHints":0,"slots":{"children":{"name":"channelId","param":{"type":"d","key":"channel-mountains","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"admin","param":null,"prefetchHints":0,"slots":{"children":{"name":"audience","param":null,"prefetchHints":0,"slots":{"children":{"name":"subscriber","param":null,"prefetchHints":0,"slots":{"children":{"name":"subscriberId","param":{"type":"d","key":"aigerim","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}}}}}}}},"staleTime":300,"buildId":"-fJHiyRhCncNjkWv65Fqa"}
