@@ -9,4 +9,4 @@
 :HL["/NRAV-PWA/assets/filter-categories/nightlife.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/active.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/concerts.webp","image",{"type":"image/webp"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"events","param":null,"prefetchHints":0,"slots":{"children":{"name":"eventId","param":{"type":"d","key":"event-night-concert","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"review","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"ByFMI9hI75Y-tVgvsODRE"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"events","param":null,"prefetchHints":0,"slots":{"children":{"name":"eventId","param":{"type":"d","key":"event-night-concert","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"review","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"Dh5jHd7BSvfuSvYzIpU_p"}
