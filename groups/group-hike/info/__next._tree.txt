@@ -7,4 +7,4 @@
 :HL["/NRAV-PWA/assets/filter-categories/nightlife.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/active.webp","image",{"type":"image/webp"}]
 :HL["/NRAV-PWA/assets/filter-categories/concerts.webp","image",{"type":"image/webp"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"groups","param":null,"prefetchHints":0,"slots":{"children":{"name":"groupId","param":{"type":"d","key":"group-hike","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"info","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"9GiJPHFO8fP4ipY2WVnPP"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"groups","param":null,"prefetchHints":0,"slots":{"children":{"name":"groupId","param":{"type":"d","key":"group-hike","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"info","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"4KZxnQZQ7c6flP_qBN1Hc"}
