@@ -1,8 +1,0 @@
-1:"$Sreact.fragment"
-2:I[42846,["/NRAV-PWA/_next/static/chunks/0~vmr~q22u99g.js","/NRAV-PWA/_next/static/chunks/0tpip~-n7a~ye.js","/NRAV-PWA/_next/static/chunks/12dej728~wi9_.js","/NRAV-PWA/_next/static/chunks/022dw3hc48-lf.js"],"ChatCreationRoute"]
-3:I[97367,["/NRAV-PWA/_next/static/chunks/0~vmr~q22u99g.js","/NRAV-PWA/_next/static/chunks/0tpip~-n7a~ye.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/NRAV-PWA/_next/static/chunks/0i..sn-tunvth.css","style"]
-:HL["/NRAV-PWA/_next/static/chunks/0gjay68i7x~.5.css","style"]
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"view":"personal"}],[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0i..sn-tunvth.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0gjay68i7x~.5.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_next/static/chunks/12dej728~wi9_.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_next/static/chunks/022dw3hc48-lf.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"7domkWX_0FCILTrnKD1nD"}
-5:null
