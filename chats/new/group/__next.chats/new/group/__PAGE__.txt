@@ -1,8 +1,8 @@
 1:"$Sreact.fragment"
-2:I[42846,["/NRAV-PWA/_next/static/chunks/0~vmr~q22u99g.js","/NRAV-PWA/_next/static/chunks/0tpip~-n7a~ye.js","/NRAV-PWA/_next/static/chunks/0y0d5lyov7aep.js","/NRAV-PWA/_next/static/chunks/0vo01429_r~41.js"],"ChatCreationRoute"]
-3:I[97367,["/NRAV-PWA/_next/static/chunks/0~vmr~q22u99g.js","/NRAV-PWA/_next/static/chunks/0tpip~-n7a~ye.js"],"OutletBoundary"]
+2:I[42846,["/NRAV-PWA/_next/static/chunks/02jdc.32o0~eg.js","/NRAV-PWA/_next/static/chunks/0tpip~-n7a~ye.js","/NRAV-PWA/_next/static/chunks/03xx3t5dl7_b-.js","/NRAV-PWA/_next/static/chunks/179_nyy~~-x3f.js"],"ChatCreationRoute"]
+3:I[97367,["/NRAV-PWA/_next/static/chunks/02jdc.32o0~eg.js","/NRAV-PWA/_next/static/chunks/0tpip~-n7a~ye.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-:HL["/NRAV-PWA/_next/static/chunks/0zbtt4pkn3aao.css","style"]
-:HL["/NRAV-PWA/_next/static/chunks/0.4z5iv6e-7wb.css","style"]
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"view":"group"}],[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0zbtt4pkn3aao.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0.4z5iv6e-7wb.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_next/static/chunks/0y0d5lyov7aep.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_next/static/chunks/0vo01429_r~41.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"kPfVoDA-PTSS599b0t_wv"}
+:HL["/NRAV-PWA/_next/static/chunks/0t01um7lmpn7t.css","style"]
+:HL["/NRAV-PWA/_next/static/chunks/0cfgs~qiq--o_.css","style"]
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"view":"group"}],[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0t01um7lmpn7t.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0cfgs~qiq--o_.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_next/static/chunks/03xx3t5dl7_b-.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_next/static/chunks/179_nyy~~-x3f.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"tcGKwAGv9AuCiD6hQ2ouj"}
 5:null
