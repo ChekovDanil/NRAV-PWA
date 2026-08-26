@@ -1,8 +1,0 @@
-1:"$Sreact.fragment"
-2:I[42846,["/NRAV-PWA/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_next/static/chunks/17kpfeyjghpx..js","/NRAV-PWA/_next/static/chunks/03xx3t5dl7_b-.js","/NRAV-PWA/_next/static/chunks/0bcry6xngfq3a.js"],"ChatCreationRoute"]
-3:I[97367,["/NRAV-PWA/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_next/static/chunks/17kpfeyjghpx..js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/NRAV-PWA/_next/static/chunks/0-_.l6yzw3gih.css","style"]
-:HL["/NRAV-PWA/_next/static/chunks/0e2a6px3_n60v.css","style"]
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"view":"hub"}],[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0-_.l6yzw3gih.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_next/static/chunks/0e2a6px3_n60v.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_next/static/chunks/03xx3t5dl7_b-.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_next/static/chunks/0bcry6xngfq3a.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Brg2GHcg091zwgfsY7BVJ"}
-5:null
