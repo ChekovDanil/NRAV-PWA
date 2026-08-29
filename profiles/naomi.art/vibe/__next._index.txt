@@ -1,11 +1,11 @@
 1:"$Sreact.fragment"
-3:I[15841,["/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/17kpfeyjghpx..js"],"VoicePlaybackProvider"]
-4:I[39756,["/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/17kpfeyjghpx..js"],"default"]
-5:I[37457,["/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/17kpfeyjghpx..js"],"default"]
-:HL["/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/0auj1ts14op4y.css","style"]
-:HL["/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/0-gcmarv_fe8g.css","style"]
-:HL["/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/11wmdv15sxnoh.css","style"]
-2:T4c1,
+3:I[15841,["/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/17kpfeyjghpx..js"],"VoicePlaybackProvider"]
+4:I[39756,["/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/17kpfeyjghpx..js"],"default"]
+9:I[37457,["/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/14h7tm44w6ws2.js","/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/17kpfeyjghpx..js"],"default"]
+:HL["/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/0auj1ts14op4y.css","style"]
+:HL["/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/0-gcmarv_fe8g.css","style"]
+:HL["/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/0b8cqc1b1..ai.css","style"]
+2:T929,
 (() => {
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches
     || window.navigator.standalone === true;
@@ -14,18 +14,35 @@
   const property = "--nr-app-viewport-height";
   const root = document.documentElement;
   let animationFrame = 0;
+  let settleTimer = 0;
 
-  const readVisibleHeight = () => {
-    const visualHeight = window.visualViewport?.height;
-    const height = typeof visualHeight === "number" && visualHeight > 0
-      ? visualHeight
-      : window.innerHeight;
-    return Math.round(height);
+  const isEditableElementActive = () => {
+    const active = document.activeElement;
+    return active instanceof HTMLElement && (
+      active.isContentEditable
+      || active.matches("input, textarea, select")
+    );
+  };
+
+  const readAppHeight = () => {
+    const layoutHeight = Math.max(window.innerHeight, root.clientHeight);
+    const viewport = window.visualViewport;
+    if (!viewport || viewport.height <= 0) return Math.ceil(layoutHeight);
+
+    // In an installed iOS web app with viewport-fit=cover and a translucent
+    // status bar, VisualViewport can start below y=0. Its height alone then
+    // shortens the application shell and exposes a strip at the bottom. The
+    // visible bottom edge is height + offsetTop. Only an actually open keyboard
+    // is allowed to make the shell shorter than the layout viewport.
+    const visualBottom = viewport.height + Math.max(0, viewport.offsetTop);
+    const keyboardRaised = isEditableElementActive()
+      && layoutHeight - viewport.height > 120;
+    return Math.ceil(keyboardRaised ? visualBottom : Math.max(layoutHeight, visualBottom));
   };
 
   const commit = () => {
     animationFrame = 0;
-    root.style.setProperty(property, readVisibleHeight() + "px");
+    root.style.setProperty(property, readAppHeight() + "px");
   };
 
   const schedule = () => {
@@ -33,15 +50,26 @@
     animationFrame = requestAnimationFrame(commit);
   };
 
+  const scheduleSettledRead = () => {
+    schedule();
+    if (settleTimer) clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(schedule, 240);
+  };
+
   const handleVisibilityChange = () => {
-    if (document.visibilityState === "visible") schedule();
+    if (document.visibilityState === "visible") scheduleSettledRead();
   };
 
   commit();
   window.addEventListener("resize", schedule);
-  window.addEventListener("pageshow", schedule);
+  window.addEventListener("orientationchange", scheduleSettledRead);
+  window.addEventListener("pageshow", scheduleSettledRead);
   window.visualViewport?.addEventListener("resize", schedule);
   window.visualViewport?.addEventListener("scroll", schedule);
   document.addEventListener("visibilitychange", handleVisibilityChange);
 })();
-0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/0auj1ts14op4y.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/0-gcmarv_fe8g.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/11wmdv15sxnoh.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/14h7tm44w6ws2.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_versions/75a686db258bf2cb4dfc06ec63c121e4db591b2e/_next/static/chunks/17kpfeyjghpx..js","async":true}]],["$","html",null,{"lang":"ru","children":["$","body",null,{"children":[["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}],["$","$L3",null,{"children":["$","main",null,{"className":"stage","children":["$","div",null,{"className":"phone","children":["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}]}]}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n(() => {\n  const getOpenHeaderMenuTrigger = () => document.querySelector('button[aria-label^=\"Действия\"][aria-expanded=\"true\"]');\n  const closeOpenHeaderMenu = () => {\n    const trigger = getOpenHeaderMenuTrigger();\n    if (trigger instanceof HTMLElement) trigger.click();\n  };\n\n  document.addEventListener('pointerdown', (event) => {\n    const trigger = getOpenHeaderMenuTrigger();\n    if (!(trigger instanceof HTMLElement)) return;\n    const target = event.target;\n    if (target instanceof Element && target.closest('button[aria-label^=\"Действия\"], [role=\"menu\"]')) return;\n    closeOpenHeaderMenu();\n  }, true);\n\n  document.addEventListener('scroll', () => closeOpenHeaderMenu(), true);\n})();\n"}}]]}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Ls4H6FCqb6Zhx4l5F_bT9"}
+0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/0auj1ts14op4y.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/0-gcmarv_fe8g.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/0b8cqc1b1..ai.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/14h7tm44w6ws2.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_versions/e676ad16b359aa2d1e30ea969696952f27d4dcb0/_next/static/chunks/17kpfeyjghpx..js","async":true}]],["$","html",null,{"lang":"ru","children":["$","body",null,{"children":[["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}],["$","$L3",null,{"children":["$","main",null,{"className":"stage","children":["$","div",null,{"className":"phone","children":["$","$L4",null,{"parallelRouterKey":"children","template":"$L5","notFound":[["$L6","$L7"],[]]}]}]}]}],"$L8"]}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"7pmhL8Onncri6gvMfHGl4"}
+5:["$","$L9",null,{}]
+6:["$","title",null,{"children":"404: This page could not be found."}]
+7:["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]
+8:["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n(() => {\n  const getOpenHeaderMenuTrigger = () => document.querySelector('button[aria-label^=\"Действия\"][aria-expanded=\"true\"]');\n  const closeOpenHeaderMenu = () => {\n    const trigger = getOpenHeaderMenuTrigger();\n    if (trigger instanceof HTMLElement) trigger.click();\n  };\n\n  document.addEventListener('pointerdown', (event) => {\n    const trigger = getOpenHeaderMenuTrigger();\n    if (!(trigger instanceof HTMLElement)) return;\n    const target = event.target;\n    if (target instanceof Element && target.closest('button[aria-label^=\"Действия\"], [role=\"menu\"]')) return;\n    closeOpenHeaderMenu();\n  }, true);\n\n  document.addEventListener('scroll', () => closeOpenHeaderMenu(), true);\n})();\n"}}]
