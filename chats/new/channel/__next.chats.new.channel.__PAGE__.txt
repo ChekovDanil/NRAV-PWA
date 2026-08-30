@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[42846,["/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0ibltz2~xcz2y.js","/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0tpip~-n7a~ye.js","/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0z1syskeodi5k.js","/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0345vpo3~br-u.js"],"ChatCreationRoute"]
+3:I[97367,["/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0ibltz2~xcz2y.js","/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0tpip~-n7a~ye.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0-v23jofpf8n1.css","style"]
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"view":"channel"}],[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0-v23jofpf8n1.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0z1syskeodi5k.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_versions/d18fe01625fbe43751c8ccf8e53f450a6472105e/_next/static/chunks/0345vpo3~br-u.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"9fyHqP0IexWGa6k3FZZQP"}
+5:null
