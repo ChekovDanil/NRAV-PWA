@@ -1,7 +1,7 @@
-:HL["/NRAV-PWA/_versions/5db2ee3d95be0d6aeb6891396a1275bd43e08af7/_next/static/chunks/0svevq0rfxznf.css","style"]
-:HL["/NRAV-PWA/_versions/5db2ee3d95be0d6aeb6891396a1275bd43e08af7/_next/static/chunks/0kx~psc70rosn.css","style"]
-:HL["/NRAV-PWA/_versions/5db2ee3d95be0d6aeb6891396a1275bd43e08af7/_next/static/chunks/0u8kjdku31iir.css","style"]
-:HL["/NRAV-PWA/_versions/5db2ee3d95be0d6aeb6891396a1275bd43e08af7/_next/static/chunks/0kiogte_b4xcw.css","style"]
-:HL["/NRAV-PWA/_versions/5db2ee3d95be0d6aeb6891396a1275bd43e08af7/_next/static/chunks/0x13_eso137q_.css","style"]
-:HL["/NRAV-PWA/_versions/5db2ee3d95be0d6aeb6891396a1275bd43e08af7/_next/static/chunks/06dflv.kzv0vw.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":24,"slots":{"children":{"name":"chats","param":null,"prefetchHints":4,"slots":{"children":{"name":"new","param":null,"prefetchHints":0,"slots":{"children":{"name":"channel","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"BxG05nn7O6DFKq8PErFX7"}
+:HL["/NRAV-PWA/_versions/a3905053ad0eff4d4edbf33049cdc297a756c689/_next/static/chunks/0svevq0rfxznf.css","style"]
+:HL["/NRAV-PWA/_versions/a3905053ad0eff4d4edbf33049cdc297a756c689/_next/static/chunks/0kx~psc70rosn.css","style"]
+:HL["/NRAV-PWA/_versions/a3905053ad0eff4d4edbf33049cdc297a756c689/_next/static/chunks/0u8kjdku31iir.css","style"]
+:HL["/NRAV-PWA/_versions/a3905053ad0eff4d4edbf33049cdc297a756c689/_next/static/chunks/0kiogte_b4xcw.css","style"]
+:HL["/NRAV-PWA/_versions/a3905053ad0eff4d4edbf33049cdc297a756c689/_next/static/chunks/0x13_eso137q_.css","style"]
+:HL["/NRAV-PWA/_versions/a3905053ad0eff4d4edbf33049cdc297a756c689/_next/static/chunks/06dflv.kzv0vw.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":24,"slots":{"children":{"name":"chats","param":null,"prefetchHints":4,"slots":{"children":{"name":"new","param":null,"prefetchHints":0,"slots":{"children":{"name":"channel","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"-jpO39SEa8IZij_dwhbxo"}
