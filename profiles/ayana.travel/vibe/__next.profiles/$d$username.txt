@@ -1,0 +1,4 @@
+1:"$Sreact.fragment"
+2:I[39756,["/NRAV-PWA/_versions/1f1bfaf82fbc5ac14864119e2ac81468a8db9fe8/_next/static/chunks/0n.93s45-9ijv.js","/NRAV-PWA/_versions/1f1bfaf82fbc5ac14864119e2ac81468a8db9fe8/_next/static/chunks/0tpip~-n7a~ye.js"],"default"]
+3:I[37457,["/NRAV-PWA/_versions/1f1bfaf82fbc5ac14864119e2ac81468a8db9fe8/_next/static/chunks/0n.93s45-9ijv.js","/NRAV-PWA/_versions/1f1bfaf82fbc5ac14864119e2ac81468a8db9fe8/_next/static/chunks/0tpip~-n7a~ye.js"],"default"]
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"NOV49nvDhU1FzBBqvc2oo"}
