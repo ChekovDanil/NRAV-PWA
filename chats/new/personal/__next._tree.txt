@@ -1,5 +1,5 @@
-:HL["/NRAV-PWA/_versions/ad4cd3a5d914f7b821521e396692fc17453828ac/_next/static/chunks/0496-tk.2z-er.css","style"]
-:HL["/NRAV-PWA/_versions/ad4cd3a5d914f7b821521e396692fc17453828ac/_next/static/chunks/0seon-1e54-wp.css","style"]
-:HL["/NRAV-PWA/_versions/ad4cd3a5d914f7b821521e396692fc17453828ac/_next/static/chunks/0jk18.quhz1jz.css","style"]
-:HL["/NRAV-PWA/_versions/ad4cd3a5d914f7b821521e396692fc17453828ac/_next/static/chunks/0shtxlyd4r-7_.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":24,"slots":{"children":{"name":"chats","param":null,"prefetchHints":4,"slots":{"children":{"name":"new","param":null,"prefetchHints":0,"slots":{"children":{"name":"personal","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"almB0GKFCRWCFoxVbaveU"}
+:HL["/NRAV-PWA/_versions/fcd6ab2e2438b43875f6d658714b5b35ce02aeda/_next/static/chunks/0496-tk.2z-er.css","style"]
+:HL["/NRAV-PWA/_versions/fcd6ab2e2438b43875f6d658714b5b35ce02aeda/_next/static/chunks/0seon-1e54-wp.css","style"]
+:HL["/NRAV-PWA/_versions/fcd6ab2e2438b43875f6d658714b5b35ce02aeda/_next/static/chunks/0kl99y6j_q8u4.css","style"]
+:HL["/NRAV-PWA/_versions/fcd6ab2e2438b43875f6d658714b5b35ce02aeda/_next/static/chunks/0shtxlyd4r-7_.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":24,"slots":{"children":{"name":"chats","param":null,"prefetchHints":4,"slots":{"children":{"name":"new","param":null,"prefetchHints":0,"slots":{"children":{"name":"personal","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}}}},"staleTime":300,"buildId":"UuW67pW2mpDpp417iDGhC"}
