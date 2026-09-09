@@ -1,5 +1,5 @@
 # Gift motion assets
 
-`midnight-suv.mp4` is the first cinematic gift motion source used by the web/PWA preview.
+`midnight-suv-v70.webm`: local preview, agreed left curved approach → stop → upward hatch opening → axial camera approach → hold. 216 frames at 30 fps, 7.2 seconds, VP9 alpha. Cropped using the union of rendered alpha bounds with padding. `midnight-suv-v70.png` is the matching poster. Original bouquet v37 preserved.
 
-Remaining gifts intentionally keep their current in-app animated fallback until separately approved production clips are available. New motion files must preserve the recipient point of view, finish with a clear gesture toward the viewer, and provide a reduced-motion poster fallback.
+The v69 open-pose-only trial was rejected by the user and is not the target scenario. Earlier files remain preserved. No public deployment.
