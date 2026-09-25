@@ -1,5 +1,5 @@
 const STALE_AFTER_MINUTES = 95;
-const PIN_HASH = "7bd3edcdad6b99d33193019c7afa97d84451d8970bd1f41d248420ecd36c7c28";
+const PIN_CODE = "4351";
 const COMMAND_REPOSITORY = "ChekovDanil/NRAV";
 
 const scheduleMap = {
@@ -55,6 +55,10 @@ const nodes = {
   snapshotAge: document.querySelector("#snapshotAge"),
   refreshButton: document.querySelector("#refreshButton"),
   sourceLine: document.querySelector("#sourceLine"),
+  approvalPanel: document.querySelector("#approvalPanel"),
+  approvalCount: document.querySelector("#approvalCount"),
+  approvalList: document.querySelector("#approvalList"),
+  notifyApprovals: document.querySelector("#notifyApprovals"),
   graphLines: document.querySelector("#graphLines"),
   graphNodes: document.querySelector("#graphNodes"),
   graphInspector: document.querySelector("#graphInspector"),
@@ -71,14 +75,6 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
-}
-
-async function sha256(value) {
-  const bytes = new TextEncoder().encode(value);
-  const digest = await crypto.subtle.digest("SHA-256", bytes);
-  return [...new Uint8Array(digest)]
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
 }
 
 function startTimers() {
@@ -115,15 +111,14 @@ function lock() {
   nodes.pinInput.focus();
 }
 
-async function handlePinSubmit(event) {
+function handlePinSubmit(event) {
   event.preventDefault();
   const value = nodes.pinInput.value.trim();
   if (!/^\d{4}$/.test(value)) {
     nodes.pinError.textContent = "Введите 4 цифры.";
     return;
   }
-  const digest = await sha256(value);
-  if (digest !== PIN_HASH) {
+  if (value !== PIN_CODE) {
     nodes.pinError.textContent = "Неверный код.";
     nodes.pinInput.select();
     return;
@@ -372,6 +367,72 @@ function renderActivity(data) {
     .join("") || '<div class="muted">Пока нет подтверждённой активности.</div>';
 }
 
+
+function decisionId(item) {
+  return String(item.id ?? item.issueNumber ?? item.title ?? "");
+}
+
+function renderDecisions(items) {
+  const decisions = Array.isArray(items) ? items : [];
+  nodes.approvalCount.textContent = String(decisions.length);
+  nodes.approvalPanel.classList.toggle("has-items", decisions.length > 0);
+
+  if (!decisions.length) {
+    nodes.approvalList.innerHTML = '<div class="approval-empty"><span class="approval-ok">✓</span><div><strong>Согласований нет</strong><div class="muted">Агенты могут продолжать автономную работу.</div></div></div>';
+    return;
+  }
+
+  nodes.approvalList.innerHTML = decisions.map((item) => {
+    const title = escapeHtml(item.title || "Нужно решение");
+    const summary = escapeHtml(item.summary || item.reason || "Требуется решение владельца.");
+    const role = escapeHtml(item.role || item.agent || "NRAV");
+    const href = item.issueUrl ? escapeHtml(item.issueUrl) : "";
+    const action = href ? '<a class="button subtle approval-link" href="' + href + '" target="_blank" rel="noopener noreferrer">Открыть</a>' : "";
+    return '<article class="approval-item">' +
+      '<div class="approval-item-main"><div class="approval-meta">' + role + '</div><div class="approval-title">' + title + '</div><div class="approval-summary">' + summary + '</div></div>' +
+      action +
+    '</article>';
+  }).join("");
+}
+
+function notifyNewDecisions(items) {
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  const decisions = Array.isArray(items) ? items : [];
+  const seen = new Set(JSON.parse(localStorage.getItem("nrav-seen-decisions") || "[]"));
+  const fresh = decisions.filter((item) => {
+    const id = decisionId(item);
+    return id && !seen.has(id);
+  });
+  if (!fresh.length) return;
+  const first = fresh[0];
+  new Notification("NRAV: нужно согласование", {
+    body: first.title || first.summary || "Откройте Control Center.",
+  });
+  fresh.forEach((item) => seen.add(decisionId(item)));
+  localStorage.setItem("nrav-seen-decisions", JSON.stringify([...seen].slice(-100)));
+}
+
+async function enableDecisionNotifications() {
+  if (!("Notification" in window)) {
+    nodes.notifyApprovals.textContent = "Не поддерживается";
+    nodes.notifyApprovals.disabled = true;
+    return;
+  }
+  const permission = await Notification.requestPermission();
+  nodes.notifyApprovals.textContent = permission === "granted" ? "Уведомления ✓" : "Уведомления";
+}
+
+async function loadDecisions() {
+  try {
+    const response = await fetch("./data/decisions.json?t=" + Date.now(), { cache: "no-store" });
+    if (!response.ok) return [];
+    const data = await response.json();
+    return Array.isArray(data.decisions) ? data.decisions : [];
+  } catch {
+    return [];
+  }
+}
+
 function handleCommandSubmit(event) {
   event.preventDefault();
   const prompt = nodes.commandInput.value.trim();
@@ -424,7 +485,10 @@ async function load() {
   nodes.refreshButton.disabled = true;
   nodes.refreshButton.textContent = "…";
   try {
-    const response = await fetch("./data/agent-status.json?t=" + Date.now(), { cache: "no-store" });
+    const [response, decisions] = await Promise.all([
+      fetch("./data/agent-status.json?t=" + Date.now(), { cache: "no-store" }),
+      loadDecisions(),
+    ]);
     if (!response.ok) throw new Error("HTTP " + response.status);
     const data = await response.json();
     if (!Array.isArray(data.agents)) throw new Error("Некорректный формат статуса");
@@ -433,6 +497,8 @@ async function load() {
     renderAgents(data);
     renderTimeline(data);
     renderIntegrationMap(data);
+    renderDecisions(decisions);
+    notifyNewDecisions(decisions);
     renderGraph(data);
     nodes.snapshotAge.textContent = "снимок " + formatAge(minutesSince(data.generatedAt));
     nodes.sourceLine.textContent = "Источник: " + data.repository + " · " + data.integrationBranch;
@@ -447,9 +513,14 @@ async function load() {
 }
 
 nodes.pinForm.addEventListener("submit", handlePinSubmit);
+nodes.pinInput.addEventListener("input", () => {
+  nodes.pinInput.value = nodes.pinInput.value.replace(/\D/g, "").slice(0, 4);
+  if (nodes.pinInput.value.length === 4) nodes.pinForm.requestSubmit();
+});
 nodes.lockButton.addEventListener("click", lock);
 nodes.commandForm.addEventListener("submit", handleCommandSubmit);
 nodes.refreshButton.addEventListener("click", load);
+nodes.notifyApprovals.addEventListener("click", enableDecisionNotifications);
 nodes.tabs.forEach((tab) => tab.addEventListener("click", () => switchTab(tab.dataset.tab)));
 
 if (sessionStorage.getItem("nrav-control-unlocked") === "1") {
