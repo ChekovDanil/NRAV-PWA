@@ -193,3 +193,19 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border
   .graph-inspector{margin-top:10px}
   .activity-item{grid-template-columns:1fr;gap:3px}
 }
+
+.approval-panel{margin-top:16px;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px}
+.approval-panel.has-items{border-color:var(--warn)}
+.approval-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.count-badge{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:var(--panel-2);font-size:12px}
+.approval-list{display:grid;gap:8px;margin-top:12px}
+.approval-empty{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel-2);border-radius:12px}
+.approval-ok{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;color:var(--good);font-weight:800}
+.approval-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;background:var(--panel-2);border:1px solid var(--border);border-radius:12px}
+.approval-item-main{min-width:0}
+.approval-meta{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);margin-bottom:3px}
+.approval-title{font-size:14px;font-weight:750}
+.approval-summary{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.45}
+.approval-note{margin:10px 0 0;font-size:11px}
+.approval-link{flex:0 0 auto;text-decoration:none}
+@media(max-width:760px){.approval-head{align-items:center}.approval-item{align-items:flex-start;flex-direction:column}.approval-link{width:100%;text-align:center}}
