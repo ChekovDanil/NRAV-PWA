@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#111111" />
+  <meta name="theme-color" content="#0f1115" />
   <meta name="robots" content="noindex,nofollow" />
   <title>NRAV Control Center</title>
   <link rel="manifest" href="./manifest.webmanifest" />
@@ -12,88 +12,142 @@
 <body>
   <section id="pinGate" class="pin-gate" aria-labelledby="pinTitle">
     <form id="pinForm" class="pin-card">
-      <p class="eyebrow">NRAV</p>
-      <h1 id="pinTitle">Control Center</h1>
-      <p class="muted pin-copy">Введите 4-значный код доступа.</p>
+      <div class="brand-mark" aria-hidden="true">N</div>
+      <p class="eyebrow">NRAV Control</p>
+      <h1 id="pinTitle">Центр управления</h1>
+      <p class="muted pin-copy">Введите код доступа.</p>
       <label class="sr-only" for="pinInput">Код доступа</label>
       <input id="pinInput" class="pin-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="one-time-code" placeholder="••••" required />
-      <button class="button primary" type="submit">Открыть</button>
+      <button class="button primary" type="submit">Открыть панель</button>
       <p id="pinError" class="pin-error" role="alert" aria-live="polite"></p>
     </form>
   </section>
 
   <main id="appShell" class="shell is-locked" aria-hidden="true">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">NRAV</p>
-        <h1>Control Center</h1>
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">N</div>
+        <div>
+          <div class="brand-title">NRAV Control Center</div>
+          <div class="brand-subtitle">Автономная разработка · <span id="snapshotAge">загрузка…</span></div>
+        </div>
       </div>
       <div class="topbar-actions">
-        <span id="snapshotAge" class="muted">Загрузка…</span>
-        <button id="refreshButton" class="button" type="button">Обновить</button>
-        <button id="lockButton" class="button" type="button">Закрыть</button>
+        <button id="refreshButton" class="icon-button" type="button" aria-label="Обновить данные">↻</button>
+        <button id="lockButton" class="button subtle" type="button">Закрыть</button>
       </div>
     </header>
 
-    <section id="health" class="summary" aria-live="polite"></section>
+    <nav class="tabs" aria-label="Разделы Control Center">
+      <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Обзор</button>
+      <button class="tab" type="button" data-tab="graph" aria-selected="false">Live Graph</button>
+    </nav>
 
-    <section class="section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Управление</p>
-          <h2>Команда главному агенту</h2>
+    <section id="overviewTab" class="tab-panel is-active" data-panel="overview">
+      <section id="health" class="health-strip" aria-live="polite"></section>
+
+      <section class="command-panel">
+        <div class="command-head">
+          <div>
+            <p class="eyebrow">Управление</p>
+            <h2>Команда основному разработчику</h2>
+          </div>
+          <div class="cycle-badge"><span class="pulse-dot"></span>Main · цикл ~15 мин</div>
         </div>
+        <form id="commandForm" class="command-form">
+          <label for="commandInput" class="sr-only">Поручение Main</label>
+          <textarea id="commandInput" maxlength="4000" rows="3" placeholder="Напишите поручение: приоритет, модуль или проверку…" required></textarea>
+          <div class="command-actions">
+            <span id="commandHint" class="muted">Команда уйдёт в приватный GitHub issue и будет принята только от ChekovDanil.</span>
+            <button class="button primary" type="submit">Отправить Main</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Состояние команды</p>
+            <h2>Агенты</h2>
+          </div>
+          <div class="status-legend" aria-label="Легенда статусов">
+            <span><i class="dot active"></i>активен</span>
+            <span><i class="dot waiting"></i>ожидает</span>
+            <span><i class="dot blocked"></i>блокер</span>
+            <span><i class="dot stale"></i>нет сигнала</span>
+          </div>
+        </div>
+        <div class="agent-table-head" aria-hidden="true">
+          <span>Агент / задача</span><span>Состояние</span><span>Последний сигнал</span><span>Результат</span>
+        </div>
+        <div id="agents" class="agent-list"></div>
+      </section>
+
+      <div class="overview-bottom">
+        <section class="section compact-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Ритм</p>
+              <h2>Запуски</h2>
+            </div>
+          </div>
+          <div id="timeline" class="timeline" aria-label="Расписание агентов"></div>
+        </section>
+
+        <section class="section compact-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Интеграция</p>
+              <h2>Server Map</h2>
+            </div>
+          </div>
+          <div id="integrationMap" class="integration-grid"></div>
+        </section>
       </div>
-      <form id="commandForm" class="command-card">
-        <label for="commandInput" class="label">Промпт / поручение</label>
-        <textarea id="commandInput" maxlength="4000" rows="5" placeholder="Например: сначала проверь публикации профиля, потом вернись к следующей server-интеграции." required></textarea>
-        <div class="command-footer">
-          <div class="muted">Команда создаётся как GitHub issue и принимается только от аккаунта ChekovDanil.</div>
-          <button class="button primary" type="submit">Отправить Main</button>
-        </div>
-        <p id="commandHint" class="muted command-hint">После нажатия откроется GitHub: проверь текст и нажми Create issue.</p>
-      </form>
     </section>
 
-    <section class="section">
-      <div class="section-heading">
+    <section id="graphTab" class="tab-panel" data-panel="graph" hidden>
+      <div class="graph-toolbar">
         <div>
-          <p class="eyebrow">Команда</p>
-          <h2>Агенты</h2>
+          <p class="eyebrow">Live topology</p>
+          <h2>Живая карта агентов</h2>
+          <p class="muted graph-copy">Линии показывают рабочие связи. Движение и интенсивность зависят от текущего состояния агентов.</p>
         </div>
-        <div class="legend">
-          <span><i class="dot active"></i>активен</span>
-          <span><i class="dot waiting"></i>ожидает</span>
-          <span><i class="dot blocked"></i>блокер</span>
-          <span><i class="dot stale"></i>давно без сигнала</span>
-        </div>
+        <div class="graph-status"><span class="pulse-dot"></span><span id="graphClock">Live</span></div>
       </div>
-      <div id="agents" class="agents"></div>
-    </section>
 
-    <section class="section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Ритм</p>
-          <h2>Цикл часа</h2>
+      <div class="graph-layout">
+        <div id="agentGraph" class="agent-graph" role="application" aria-label="Интерактивная карта агентов">
+          <svg id="graphLines" class="graph-lines" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div id="graphNodes" class="graph-nodes"></div>
+          <div class="core-node" aria-hidden="true">
+            <span class="core-ring"></span>
+            <strong>NRAV</strong>
+            <small>Core</small>
+          </div>
         </div>
-      </div>
-      <div id="timeline" class="timeline" aria-label="Расписание агентов"></div>
-    </section>
 
-    <section class="section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Интеграция</p>
-          <h2>Server Integration Map</h2>
-        </div>
+        <aside id="graphInspector" class="graph-inspector" aria-live="polite">
+          <p class="eyebrow">Инспектор</p>
+          <h3>Выберите агента</h3>
+          <p class="muted">Нажмите на узел, чтобы увидеть текущую задачу, результат, следующий шаг и commit.</p>
+        </aside>
       </div>
-      <div id="integrationMap" class="integration-grid"></div>
+
+      <section class="activity-feed">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Поток</p>
+            <h2>Последняя активность</h2>
+          </div>
+        </div>
+        <div id="activityFeed" class="activity-list"></div>
+      </section>
     </section>
 
     <footer>
       <span id="sourceLine">Источник: agent-status.json</span>
-      <span>PIN на GitHub Pages — локальный барьер. Реальная защита команд дополнительно проверяет GitHub-автора.</span>
+      <span>Команды подтверждаются приватным GitHub-аккаунтом владельца.</span>
     </footer>
   </main>
   <script type="module" src="./app.js"></script>
