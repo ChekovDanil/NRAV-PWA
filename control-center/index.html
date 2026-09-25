@@ -46,6 +46,20 @@
     <section id="overviewTab" class="tab-panel is-active" data-panel="overview">
       <section id="health" class="health-strip" aria-live="polite"></section>
 
+      <section id="approvalPanel" class="approval-panel">
+        <div class="approval-head">
+          <div>
+            <p class="eyebrow">Решения владельца</p>
+            <h2>Нужно согласовать <span id="approvalCount" class="count-badge">0</span></h2>
+          </div>
+          <button id="notifyApprovals" class="button subtle" type="button">Уведомления</button>
+        </div>
+        <div id="approvalList" class="approval-list">
+          <div class="muted">Загрузка решений…</div>
+        </div>
+        <p class="muted approval-note">Крупные изменения структуры, навигации и глобального UI ждут решения здесь. Агент при этом продолжает другие безопасные задачи.</p>
+      </section>
+
       <section class="command-panel">
         <div class="command-head">
           <div>
