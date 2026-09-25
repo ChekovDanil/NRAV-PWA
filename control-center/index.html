@@ -10,7 +10,19 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main class="shell">
+  <section id="pinGate" class="pin-gate" aria-labelledby="pinTitle">
+    <form id="pinForm" class="pin-card">
+      <p class="eyebrow">NRAV</p>
+      <h1 id="pinTitle">Control Center</h1>
+      <p class="muted pin-copy">Введите 4-значный код доступа.</p>
+      <label class="sr-only" for="pinInput">Код доступа</label>
+      <input id="pinInput" class="pin-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="one-time-code" placeholder="••••" required />
+      <button class="button primary" type="submit">Открыть</button>
+      <p id="pinError" class="pin-error" role="alert" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <main id="appShell" class="shell is-locked" aria-hidden="true">
     <header class="topbar">
       <div>
         <p class="eyebrow">NRAV</p>
@@ -19,10 +31,29 @@
       <div class="topbar-actions">
         <span id="snapshotAge" class="muted">Загрузка…</span>
         <button id="refreshButton" class="button" type="button">Обновить</button>
+        <button id="lockButton" class="button" type="button">Закрыть</button>
       </div>
     </header>
 
     <section id="health" class="summary" aria-live="polite"></section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Управление</p>
+          <h2>Команда главному агенту</h2>
+        </div>
+      </div>
+      <form id="commandForm" class="command-card">
+        <label for="commandInput" class="label">Промпт / поручение</label>
+        <textarea id="commandInput" maxlength="4000" rows="5" placeholder="Например: сначала проверь публикации профиля, потом вернись к следующей server-интеграции." required></textarea>
+        <div class="command-footer">
+          <div class="muted">Команда создаётся как GitHub issue и принимается только от аккаунта ChekovDanil.</div>
+          <button class="button primary" type="submit">Отправить Main</button>
+        </div>
+        <p id="commandHint" class="muted command-hint">После нажатия откроется GitHub: проверь текст и нажми Create issue.</p>
+      </form>
+    </section>
 
     <section class="section">
       <div class="section-heading">
@@ -62,7 +93,7 @@
 
     <footer>
       <span id="sourceLine">Источник: agent-status.json</span>
-      <span>Внешнюю авторизацию нужно включить на уровне hosting (например, Cloudflare Access).</span>
+      <span>PIN на GitHub Pages — локальный барьер. Реальная защита команд дополнительно проверяет GitHub-автора.</span>
     </footer>
   </main>
   <script type="module" src="./app.js"></script>
