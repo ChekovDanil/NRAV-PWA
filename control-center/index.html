@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0f1115" />
+  <meta name="theme-color" content="#0b0d10" />
   <meta name="robots" content="noindex,nofollow" />
   <title>NRAV Control Center</title>
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="stylesheet" href="./styles.css?v=4" />
+  <link rel="stylesheet" href="./styles.css?v=5" />
 </head>
 <body>
   <section id="pinGate" class="pin-gate" aria-labelledby="pinTitle">
     <form id="pinForm" class="pin-card">
-      <div class="brand-mark" aria-hidden="true">N</div>
-      <p class="eyebrow">NRAV Control</p>
-      <h1 id="pinTitle">Центр управления</h1>
-      <p class="muted pin-copy">Введите код доступа.</p>
+      <img class="pin-logo" src="./assets/nrav-wordmark.svg" alt="NRAV" />
+      <h1 id="pinTitle">Control Center</h1>
+      <p class="muted pin-copy">Введите код доступа</p>
       <label class="sr-only" for="pinInput">Код доступа</label>
       <input id="pinInput" class="pin-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="one-time-code" placeholder="••••" required />
-      <button class="button primary" type="submit">Открыть панель</button>
+      <button class="button primary wide" type="submit">Войти</button>
       <p id="pinError" class="pin-error" role="alert" aria-live="polite"></p>
     </form>
   </section>
@@ -26,15 +25,15 @@
   <main id="appShell" class="shell is-locked" aria-hidden="true">
     <header class="app-header">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">N</div>
-        <div>
-          <div class="brand-title">NRAV Control Center</div>
-          <div class="brand-subtitle">Автономная разработка · <span id="snapshotAge">загрузка…</span></div>
+        <img class="brand-logo" src="./assets/nrav-wordmark.svg" alt="NRAV" />
+        <div class="brand-meta">
+          <div class="brand-title">Control Center</div>
+          <div class="brand-subtitle"><span id="snapshotAge">загрузка…</span></div>
         </div>
       </div>
       <div class="topbar-actions">
-        <button id="refreshButton" class="icon-button" type="button" aria-label="Обновить данные">↻</button>
-        <button id="lockButton" class="button subtle" type="button">Закрыть</button>
+        <button id="refreshButton" class="icon-button" type="button" aria-label="Обновить данные" title="Обновить">↻</button>
+        <button id="lockButton" class="text-button" type="button">Выйти</button>
       </div>
     </header>
 
@@ -48,73 +47,52 @@
 
       <section id="approvalPanel" class="approval-panel">
         <div class="approval-head">
-          <div>
-            <p class="eyebrow">Решения владельца</p>
-            <h2>Нужно согласовать <span id="approvalCount" class="count-badge">0</span></h2>
-          </div>
-          <button id="notifyApprovals" class="button subtle" type="button">Уведомления</button>
+          <div class="approval-heading">Нужно согласовать <span id="approvalCount" class="count-badge">0</span></div>
+          <button id="notifyApprovals" class="text-button" type="button">Уведомления</button>
         </div>
         <div id="approvalList" class="approval-list">
-          <div class="muted">Загрузка решений…</div>
+          <div class="muted">Загрузка…</div>
         </div>
-        <p class="muted approval-note">Крупные изменения структуры, навигации и глобального UI ждут решения здесь. Агент при этом продолжает другие безопасные задачи.</p>
       </section>
 
-      <section class="command-panel">
-        <div class="command-head">
-          <div>
-            <p class="eyebrow">Управление</p>
-            <h2>Команда основному разработчику</h2>
-          </div>
-          <div class="cycle-badge"><span class="pulse-dot"></span>Main · цикл ~15 мин</div>
-        </div>
+      <section class="command-panel" aria-label="Команда основному разработчику">
         <form id="commandForm" class="command-form">
-          <label for="commandInput" class="sr-only">Поручение Main</label>
-          <textarea id="commandInput" maxlength="4000" rows="3" placeholder="Напишите поручение: приоритет, модуль или проверку…" required></textarea>
+          <label for="commandInput" class="sr-only">Поручение основному разработчику</label>
+          <textarea id="commandInput" maxlength="4000" rows="3" placeholder="Напишите или продиктуйте команду основному разработчику…" required></textarea>
           <div class="command-actions">
-            <span id="commandHint" class="muted">Команда уйдёт в приватный GitHub issue и будет принята только от ChekovDanil.</span>
-            <button class="button primary" type="submit">Отправить Main</button>
+            <button id="voiceButton" class="voice-button" type="button" aria-label="Продиктовать команду">
+              <span class="voice-icon" aria-hidden="true">●</span>
+              <span id="voiceLabel">Голос</span>
+            </button>
+            <span id="commandHint" class="command-hint">Main проверит команду в ближайшем цикле</span>
+            <button class="button primary send-button" type="submit">Отправить</button>
           </div>
         </form>
       </section>
 
-      <section class="section">
+      <section class="section agents-section">
         <div class="section-heading">
-          <div>
-            <p class="eyebrow">Состояние команды</p>
-            <h2>Агенты</h2>
-          </div>
+          <h2>Агенты</h2>
           <div class="status-legend" aria-label="Легенда статусов">
             <span><i class="dot active"></i>активен</span>
             <span><i class="dot waiting"></i>ожидает</span>
-            <span><i class="dot blocked"></i>блокер</span>
-            <span><i class="dot stale"></i>нет сигнала</span>
+            <span><i class="dot blocked"></i>нужно вмешательство</span>
           </div>
         </div>
         <div class="agent-table-head" aria-hidden="true">
-          <span>Агент / задача</span><span>Состояние</span><span>Последний сигнал</span><span>Результат</span>
+          <span>Агент</span><span>Статус</span><span>Последний сигнал</span><span>Результат</span>
         </div>
         <div id="agents" class="agent-list"></div>
       </section>
 
       <div class="overview-bottom">
         <section class="section compact-section">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Ритм</p>
-              <h2>Запуски</h2>
-            </div>
-          </div>
+          <div class="section-heading"><h2>Цикл работы</h2></div>
           <div id="timeline" class="timeline" aria-label="Расписание агентов"></div>
         </section>
 
         <section class="section compact-section">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Интеграция</p>
-              <h2>Server Map</h2>
-            </div>
-          </div>
+          <div class="section-heading"><h2>Server Map</h2></div>
           <div id="integrationMap" class="integration-grid"></div>
         </section>
       </div>
@@ -123,47 +101,44 @@
     <section id="graphTab" class="tab-panel" data-panel="graph" hidden>
       <div class="graph-toolbar">
         <div>
-          <p class="eyebrow">Live topology</p>
-          <h2>Живая карта агентов</h2>
-          <p class="muted graph-copy">Линии показывают рабочие связи. Движение и интенсивность зависят от текущего состояния агентов.</p>
+          <h2>Live Graph</h2>
+          <p class="graph-copy">Живая карта взаимодействий и текущей активности агентов.</p>
         </div>
         <div class="graph-status"><span class="pulse-dot"></span><span id="graphClock">Live</span></div>
       </div>
 
       <div class="graph-layout">
         <div id="agentGraph" class="agent-graph" role="application" aria-label="Интерактивная карта агентов">
-          <svg id="graphLines" class="graph-lines" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="neural-haze haze-a"></div>
+          <div class="neural-haze haze-b"></div>
+          <svg id="graphLines" class="graph-lines" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true"></svg>
           <div id="graphNodes" class="graph-nodes"></div>
           <div class="core-node" aria-hidden="true">
-            <span class="core-ring"></span>
-            <strong>NRAV</strong>
-            <small>Core</small>
+            <span class="core-orbit orbit-a"></span>
+            <span class="core-orbit orbit-b"></span>
+            <img src="./assets/nrav-wordmark.svg" alt="" />
+            <small>core</small>
           </div>
         </div>
 
         <aside id="graphInspector" class="graph-inspector" aria-live="polite">
-          <p class="eyebrow">Инспектор</p>
-          <h3>Выберите агента</h3>
-          <p class="muted">Нажмите на узел, чтобы увидеть текущую задачу, результат, следующий шаг и commit.</p>
+          <div class="inspector-kicker">Агент</div>
+          <h3>Выберите узел</h3>
+          <p class="muted">Здесь появятся текущая задача, результат и следующий шаг.</p>
         </aside>
       </div>
 
       <section class="activity-feed">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Поток</p>
-            <h2>Последняя активность</h2>
-          </div>
-        </div>
+        <div class="section-heading"><h2>Последняя активность</h2></div>
         <div id="activityFeed" class="activity-list"></div>
       </section>
     </section>
 
     <footer>
       <span id="sourceLine">Источник: agent-status.json</span>
-      <span>Команды подтверждаются приватным GitHub-аккаунтом владельца.</span>
+      <span>NRAV autonomous development</span>
     </footer>
   </main>
-  <script type="module" src="./app.js?v=4"></script>
+  <script type="module" src="./app.js?v=5"></script>
 </body>
 </html>
