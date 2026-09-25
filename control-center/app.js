@@ -12,12 +12,12 @@ const scheduleMap = {
 };
 
 const graphPositions = {
-  main: { x: 20, y: 30, vx: 200, vy: 186 },
-  parallel: { x: 80, y: 30, vx: 800, vy: 186 },
-  qa: { x: 18, y: 72, vx: 180, vy: 446 },
-  product: { x: 82, y: 72, vx: 820, vy: 446 },
-  admin: { x: 50, y: 14, vx: 500, vy: 87 },
-  controller: { x: 50, y: 88, vx: 500, vy: 546 },
+  main: { x: 18, y: 31, vx: 180, vy: 211 },
+  parallel: { x: 82, y: 31, vx: 820, vy: 211 },
+  qa: { x: 16, y: 72, vx: 160, vy: 490 },
+  product: { x: 84, y: 72, vx: 840, vy: 490 },
+  admin: { x: 50, y: 13, vx: 500, vy: 88 },
+  controller: { x: 50, y: 88, vx: 500, vy: 598 },
 };
 
 const graphConnections = [
@@ -48,6 +48,8 @@ const nodes = {
   commandForm: document.querySelector("#commandForm"),
   commandInput: document.querySelector("#commandInput"),
   commandHint: document.querySelector("#commandHint"),
+  voiceButton: document.querySelector("#voiceButton"),
+  voiceLabel: document.querySelector("#voiceLabel"),
   health: document.querySelector("#health"),
   agents: document.querySelector("#agents"),
   timeline: document.querySelector("#timeline"),
@@ -167,7 +169,7 @@ function statusLabel(status) {
   return {
     active: "активен",
     waiting: "ожидает",
-    blocked: "блокер",
+    blocked: "восстановление",
     stale: "нет сигнала",
   }[status] || status;
 }
@@ -289,38 +291,61 @@ function renderIntegrationMap(data) {
 }
 
 function graphPoint(id) {
-  if (id === "core") return { vx: 500, vy: 310 };
-  return graphPositions[id] || { vx: 500, vy: 310 };
+  if (id === "core") return { vx: 500, vy: 340 };
+  return graphPositions[id] || { vx: 500, vy: 340 };
+}
+
+function curvedPath(from, to, index) {
+  const a = graphPoint(from);
+  const b = graphPoint(to);
+  const dx = b.vx - a.vx;
+  const dy = b.vy - a.vy;
+  const length = Math.max(1, Math.hypot(dx, dy));
+  const nx = -dy / length;
+  const ny = dx / length;
+  const direction = index % 2 === 0 ? 1 : -1;
+  const bend = direction * (28 + (index % 4) * 11);
+  const cx = (a.vx + b.vx) / 2 + nx * bend;
+  const cy = (a.vy + b.vy) / 2 + ny * bend;
+  return "M " + a.vx + " " + a.vy + " Q " + cx.toFixed(1) + " " + cy.toFixed(1) + " " + b.vx + " " + b.vy;
 }
 
 function renderGraph(data) {
   const byId = new Map(data.agents.map((agent) => [agent.id, agent]));
-  nodes.graphLines.innerHTML = graphConnections
-    .map(([from, to]) => {
-      const a = graphPoint(from);
-      const b = graphPoint(to);
-      const sourceAgent = byId.get(from);
-      const targetAgent = byId.get(to);
-      const status = sourceAgent ? effectiveStatus(sourceAgent) : (targetAgent ? effectiveStatus(targetAgent) : "active");
-      const className = status === "blocked" ? "graph-line blocked" : (status === "active" ? "graph-line hot" : "graph-line");
-      return '<line class="' + className + '" x1="' + a.vx + '" y1="' + a.vy + '" x2="' + b.vx + '" y2="' + b.vy + '"></line>';
-    })
-    .join("");
+  const defs = '<defs>' +
+    '<filter id="synapseGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3.2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    '<linearGradient id="signalGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f8cff" stop-opacity=".08"/><stop offset=".45" stop-color="#a7b7ff" stop-opacity=".8"/><stop offset="1" stop-color="#69e0c1" stop-opacity=".14"/></linearGradient>' +
+    '</defs>';
 
-  nodes.graphNodes.innerHTML = data.agents
-    .map((agent) => {
-      const pos = graphPositions[agent.id] || { x: 50, y: 50 };
-      const status = effectiveStatus(agent);
-      const selected = selectedAgentId === agent.id ? " is-selected" : "";
-      return (
-        '<button type="button" class="graph-node' + selected + '" data-graph-agent="' + escapeHtml(agent.id) + '" style="left:' + pos.x + "%;top:" + pos.y + '%">' +
-          '<div class="graph-node-head"><span class="graph-node-name">' + escapeHtml(agent.shortName || agent.name) + '</span><i class="dot ' + status + '"></i></div>' +
-          '<div class="graph-node-role">' + escapeHtml(agent.role || "agent") + "</div>" +
-          '<div class="graph-node-task">' + escapeHtml(agent.focus || "—") + "</div>" +
-        "</button>"
-      );
-    })
-    .join("");
+  const links = graphConnections.map(([from, to], index) => {
+    const sourceAgent = byId.get(from);
+    const targetAgent = byId.get(to);
+    const status = sourceAgent ? effectiveStatus(sourceAgent) : (targetAgent ? effectiveStatus(targetAgent) : "active");
+    const path = curvedPath(from, to, index);
+    const hot = status === "active";
+    const blocked = status === "blocked";
+    const duration = (2.2 + (index % 4) * .55).toFixed(2);
+    return '<path class="synapse synapse-back" d="' + path + '"></path>' +
+      '<path class="synapse ' + (blocked ? "is-blocked" : hot ? "is-hot" : "") + '" d="' + path + '"></path>' +
+      (hot ? '<circle class="signal-particle" r="' + (index % 3 === 0 ? "3.6" : "2.8") + '" filter="url(#synapseGlow)">' +
+        '<animateMotion dur="' + duration + 's" repeatCount="indefinite" path="' + path + '"></animateMotion></circle>' : '');
+  }).join("");
+
+  nodes.graphLines.innerHTML = defs + links;
+
+  nodes.graphNodes.innerHTML = data.agents.map((agent, index) => {
+    const pos = graphPositions[agent.id] || { x: 50, y: 50 };
+    const status = effectiveStatus(agent);
+    const selected = selectedAgentId === agent.id ? " is-selected" : "";
+    return '<button type="button" class="graph-node status-' + status + selected + '" data-graph-agent="' + escapeHtml(agent.id) + '" style="left:' + pos.x + "%;top:" + pos.y + '%;--node-delay:-' + (index * .7).toFixed(1) + 's">' +
+      '<span class="graph-node-avatar">' + escapeHtml(initials(agent)) + '</span>' +
+      '<span class="graph-node-copy">' +
+        '<span class="graph-node-top"><strong>' + escapeHtml(agent.shortName || agent.name) + '</strong><i class="dot ' + status + '"></i></span>' +
+        '<span class="graph-node-role">' + escapeHtml(agent.role || "agent") + '</span>' +
+        '<span class="graph-node-task">' + escapeHtml(agent.focus || "—") + '</span>' +
+      '</span>' +
+    '</button>';
+  }).join("");
 
   nodes.graphNodes.querySelectorAll("[data-graph-agent]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -433,6 +458,60 @@ async function loadDecisions() {
   }
 }
 
+let speechRecognition = null;
+let speechBaseText = "";
+
+function setupVoiceInput() {
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Recognition) {
+    nodes.voiceButton.classList.add("is-unavailable");
+    nodes.voiceButton.title = "Голосовой ввод не поддерживается этим браузером";
+    return;
+  }
+
+  speechRecognition = new Recognition();
+  speechRecognition.lang = "ru-RU";
+  speechRecognition.continuous = true;
+  speechRecognition.interimResults = true;
+
+  speechRecognition.onstart = () => {
+    speechBaseText = nodes.commandInput.value.trim();
+    nodes.voiceButton.classList.add("is-listening");
+    nodes.voiceLabel.textContent = "Слушаю…";
+    nodes.commandHint.textContent = "Говорите — текст появится в поле команды";
+  };
+
+  speechRecognition.onresult = (event) => {
+    let transcript = "";
+    for (let i = 0; i < event.results.length; i += 1) {
+      transcript += event.results[i][0].transcript + " ";
+    }
+    nodes.commandInput.value = [speechBaseText, transcript.trim()].filter(Boolean).join(" ");
+  };
+
+  speechRecognition.onerror = () => {
+    nodes.commandHint.textContent = "Не удалось распознать речь. Можно продолжить текстом.";
+  };
+
+  speechRecognition.onend = () => {
+    nodes.voiceButton.classList.remove("is-listening");
+    nodes.voiceLabel.textContent = "Голос";
+    nodes.commandHint.textContent = "Main проверит команду в ближайшем цикле";
+  };
+}
+
+function toggleVoiceInput() {
+  if (!speechRecognition) {
+    nodes.commandHint.textContent = "Голосовой ввод не поддерживается этим браузером";
+    return;
+  }
+  if (nodes.voiceButton.classList.contains("is-listening")) {
+    speechRecognition.stop();
+  } else {
+    speechRecognition.start();
+  }
+}
+
 function handleCommandSubmit(event) {
   event.preventDefault();
   const prompt = nodes.commandInput.value.trim();
@@ -521,6 +600,8 @@ nodes.lockButton.addEventListener("click", lock);
 nodes.commandForm.addEventListener("submit", handleCommandSubmit);
 nodes.refreshButton.addEventListener("click", load);
 nodes.notifyApprovals.addEventListener("click", enableDecisionNotifications);
+nodes.voiceButton.addEventListener("click", toggleVoiceInput);
+setupVoiceInput();
 nodes.tabs.forEach((tab) => tab.addEventListener("click", () => switchTab(tab.dataset.tab)));
 
 if (sessionStorage.getItem("nrav-control-unlocked") === "1") {
