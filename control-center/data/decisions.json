@@ -1,5 +1,11 @@
 {
   "version": 1,
-  "updatedAt": null,
-  "decisions": []
+  "updatedAt": "2026-09-26T17:52:52Z",
+  "decisions": [
+    {
+      "id": "issue-513",
+      "issueNumber": 513,
+      "title": "Проверить социальный граф и состояния приватности"
+    }
+  ]
 }
