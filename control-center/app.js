@@ -162,7 +162,8 @@ function formatClock(iso) {
 }
 
 function effectiveStatus(agent) {
-  if (agent.blocker) return "blocked";
+  if (agent.blocker && agent.resolutionMode === "owner") return "blocked";
+  if (agent.blocker && agent.resolutionMode === "automatic") return "recovering";
   const age = minutesSince(agent.lastRun);
   if (age !== null && age > STALE_AFTER_MINUTES) return "stale";
   if (!agent.lastRun) return "waiting";
@@ -173,7 +174,8 @@ function statusLabel(status) {
   return {
     active: "активен",
     waiting: "ожидает",
-    blocked: "восстановление",
+    recovering: "исправляется автоматически",
+    blocked: "нужен ваш ответ",
     stale: "нет сигнала",
   }[status] || status;
 }
@@ -203,7 +205,8 @@ function initials(agent) {
 function renderHealth(data) {
   const statuses = data.agents.map(effectiveStatus);
   const active = statuses.filter((status) => status === "active").length;
-  const attention = statuses.filter((status) => status === "blocked" || status === "stale").length;
+  const ownerAttention = statuses.filter((status) => status === "blocked").length;
+  const recovering = statuses.filter((status) => status === "recovering" || status === "stale").length;
   const main = data.agents.find((agent) => agent.id === "main");
   const mainAge = main ? formatAge(minutesSince(main.lastRun)) : "нет данных";
   const commits = data.agents.filter((agent) => agent.commit && agent.commit !== "—").length;
@@ -211,8 +214,8 @@ function renderHealth(data) {
   nodes.health.innerHTML = [
     '<article class="health-card primary-health"><div class="health-value">~30 мин</div><div class="health-label">Цикл Main</div><div class="health-meta">Последний сигнал: ' + escapeHtml(mainAge) + "</div></article>",
     '<article class="health-card"><div class="health-value">' + active + '</div><div class="health-label">Активных агентов</div><div class="health-meta">из ' + data.agents.length + "</div></article>",
-    '<article class="health-card"><div class="health-value">' + attention + '</div><div class="health-label">Нужно внимания</div><div class="health-meta">blocker / stale</div></article>',
-    '<article class="health-card"><div class="health-value">' + commits + '</div><div class="health-label">Свежих веток</div><div class="health-meta">с подтверждённым commit</div></article>',
+    '<article class="health-card"><div class="health-value">' + recovering + '</div><div class="health-label">Исправляется</div><div class="health-meta">автоматически или ждёт сигнал</div></article>',
+    '<article class="health-card' + (ownerAttention ? ' needs-owner' : '') + '"><div class="health-value">' + ownerAttention + '</div><div class="health-label">Нужен ваш ответ</div><div class="health-meta">только решения владельца</div></article>',
   ].join("");
 }
 
@@ -227,8 +230,8 @@ function renderAgents(data) {
       const status = effectiveStatus(agent);
       const age = formatAge(minutesSince(agent.lastRun));
       const blocker = agent.blocker
-        ? '<div><div class="label">Блокер</div><div class="value error-inline">' + escapeHtml(agent.blocker) + "</div></div>"
-        : '<div><div class="label">Блокер</div><div class="value">нет</div></div>';
+        ? '<div class="agent-resolution"><div class="label">' + (agent.resolutionMode === "owner" ? "Нужен ваш ответ" : "Автоматическое исправление") + '</div><div class="value ' + (agent.resolutionMode === "owner" ? "error-inline" : "repair-inline") + '">' + escapeHtml(agent.blocker) + '</div>' + resolutionAction(agent) + "</div>"
+        : '<div><div class="label">Проблемы</div><div class="value">нет</div></div>';
       return (
         '<article class="agent-row' + (agent.id === "main" ? " is-main" : "") + '" data-agent-row="' + escapeHtml(agent.id) + '">' +
           '<div class="agent-identity">' +
@@ -280,11 +283,11 @@ function renderTimeline(data) {
 function renderIntegrationMap(data) {
   const map = data.serverIntegrationMap || {};
   const entries = [
-    ["Connected", map.connected],
-    ["Partial", map.partial],
-    ["Local / Mock", map.localOrMock],
-    ["Claimed", map.claimed],
-    ["Blocked", map.blocked],
+    ["Подключено", map.connected],
+    ["Частично", map.partial],
+    ["Локально / демо", map.localOrMock],
+    ["В работе", map.claimed],
+    ["Заблокировано", map.blocked],
   ];
   nodes.integrationMap.innerHTML = entries
     .map(([label, value]) => (
@@ -377,8 +380,33 @@ function renderInspector(data, agentId) {
       '<div class="inspector-block"><div class="label">Последний результат</div><div class="value">' + escapeHtml(agent.lastResult || "—") + "</div></div>" +
       '<div class="inspector-block"><div class="label">Дальше</div><div class="value">' + escapeHtml(agent.next || "—") + "</div></div>" +
       '<div class="inspector-block"><div class="label">Ветка / commit</div><div class="value code">' + escapeHtml(agent.branch || "—") + "<br>" + escapeHtml(agent.commit || "—") + "</div></div>" +
-      (agent.blocker ? '<div class="inspector-block"><div class="label">Блокер</div><div class="value error-inline">' + escapeHtml(agent.blocker) + "</div></div>" : "") +
+      (agent.blocker ? '<div class="inspector-block resolution-block"><div class="label">' + (agent.resolutionMode === "owner" ? "Нужен ваш ответ" : "Исправляется автоматически") + '</div><div class="value ' + (agent.resolutionMode === "owner" ? "error-inline" : "repair-inline") + '">' + escapeHtml(agent.blocker) + '</div>' + resolutionAction(agent) + "</div>" : "") +
     "</div>";
+}
+
+function actionIssueUrl({ title, prompt }) {
+  const url = new URL("https://github.com/" + COMMAND_REPOSITORY + "/issues/new");
+  url.searchParams.set("title", title);
+  url.searchParams.set("body", [
+    "## Поручение из NRAV Control Center",
+    "",
+    prompt,
+    "",
+    "Источник: control-center",
+    "Создано: " + new Date().toISOString(),
+  ].join("\n"));
+  return url.toString();
+}
+
+function resolutionAction(agent) {
+  if (!agent.blocker) return "";
+  const needsOwner = agent.resolutionMode === "owner";
+  const label = needsOwner ? "Ответить / согласовать" : "Поручить исправление";
+  const prompt = needsOwner
+    ? "Нужно решение владельца по роли " + agent.name + ": " + agent.blocker
+    : "Автоматически устранить техническую проблему роли " + agent.name + ": " + agent.blocker + ". Сначала выполнить минимальные проверки, не расширять scope и сообщить результат по-русски.";
+  const href = actionIssueUrl({ title: "[NRAV CONTROL] " + label + ": " + agent.shortName, prompt });
+  return '<a class="button resolution-action" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
 }
 
 function renderActivity(data) {
@@ -417,7 +445,11 @@ function renderDecisions(items) {
     const summary = escapeHtml(item.summary || item.reason || "Требуется решение владельца.");
     const role = escapeHtml(item.role || item.agent || "NRAV");
     const href = item.issueUrl ? escapeHtml(item.issueUrl) : "";
-    const action = href ? '<a class="button subtle approval-link" href="' + href + '" target="_blank" rel="noopener noreferrer">Открыть</a>' : "";
+    const actionHref = href || escapeHtml(actionIssueUrl({
+      title: "[NRAV CONTROL] Ответ владельца: " + (item.title || "решение"),
+      prompt: "Ответить или согласовать: " + (item.title || "Нужно решение") + "\n\nКонтекст: " + (item.summary || item.reason || "Требуется решение владельца."),
+    }));
+    const action = '<a class="button subtle approval-link" href="' + actionHref + '" target="_blank" rel="noopener noreferrer">Ответить / согласовать</a>';
     return '<article class="approval-item">' +
       '<div class="approval-item-main"><div class="approval-meta">' + role + '</div><div class="approval-title">' + title + '</div><div class="approval-summary">' + summary + '</div></div>' +
       action +

@@ -43,6 +43,7 @@ button{color:inherit}
 .label{font-size:10px;font-weight:650;letter-spacing:.065em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
 .value{font-size:12px;line-height:1.5;color:var(--text-soft);word-break:break-word}
 .error-inline{color:#f1a0a0}
+.repair-inline{color:#e7c985}
 
 .pin-gate{
   min-height:100svh;
@@ -173,6 +174,7 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
   background:rgba(255,255,255,.035);
 }
 .health-card.primary-health{background:linear-gradient(135deg,rgba(113,141,255,.11),rgba(255,255,255,.025) 70%)}
+.health-card.needs-owner{background:linear-gradient(135deg,rgba(231,122,122,.11),rgba(255,255,255,.025) 70%)}
 .health-value{font-size:22px;font-weight:720;letter-spacing:-.045em}
 .health-label{margin-top:3px;font-size:11px;color:var(--text-soft)}
 .health-meta{margin-top:5px;font-size:10.5px;color:var(--muted)}
@@ -268,6 +270,7 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
 .dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--stale);flex:0 0 auto}
 .dot.active{background:var(--good);box-shadow:0 0 10px rgba(102,212,156,.25)}
 .dot.waiting{background:var(--warn)}
+.dot.recovering{background:var(--warn);box-shadow:0 0 10px rgba(216,173,97,.2)}
 .dot.blocked{background:var(--bad)}
 .dot.stale{background:var(--stale)}
 
@@ -322,6 +325,8 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
   background:#0f1216;
 }
 .agent-row.is-open .agent-detail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.agent-resolution{display:flex;flex-direction:column;align-items:flex-start}
+.resolution-action{display:inline-flex;margin-top:9px;padding:8px 10px;text-decoration:none;white-space:nowrap}
 
 .overview-bottom{display:grid;grid-template-columns:1.18fr .82fr;gap:18px;margin-top:25px}
 .timeline{display:flex;gap:7px;overflow-x:auto;padding:1px 0 5px;scrollbar-width:thin}
@@ -331,10 +336,10 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
 }
 .timeline-time{font-size:14px;font-weight:720;letter-spacing:-.025em}
 .timeline-name{margin-top:2px;font-size:10px;color:var(--muted)}
-.integration-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
-.integration-card{padding:11px 10px;border-radius:11px;background:rgba(255,255,255,.03)}
+.integration-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:7px}
+.integration-card{min-width:0;padding:12px 11px;border-radius:11px;background:rgba(255,255,255,.03)}
 .integration-count{font-size:18px;font-weight:720;letter-spacing:-.035em}
-.integration-name{margin-top:2px;font-size:9.5px;color:var(--muted)}
+.integration-name{margin-top:3px;font-size:10.5px;line-height:1.3;color:var(--muted);overflow-wrap:anywhere}
 
 .graph-toolbar{
   display:flex;align-items:flex-start;justify-content:space-between;
@@ -414,6 +419,7 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
   z-index:8;
 }
 .graph-node.status-active .graph-node-avatar{background:linear-gradient(145deg,rgba(113,141,255,.16),rgba(110,224,208,.08));color:#dce4ff}
+.graph-node.status-recovering .graph-node-avatar{background:linear-gradient(145deg,rgba(216,173,97,.2),rgba(255,255,255,.04));color:#f0d99e}
 .graph-node.status-blocked{opacity:.82}
 @keyframes node-float{0%,100%{margin-top:0}50%{margin-top:-5px}}
 .graph-node-avatar{
@@ -516,7 +522,7 @@ footer{
   .agent-age,.agent-result{display:none}
   .agent-row.is-open .agent-detail{grid-template-columns:1fr 1fr;margin-left:0}
   .status-legend{display:none}
-  .integration-grid{grid-template-columns:repeat(5,minmax(70px,1fr));overflow-x:auto}
+  .integration-grid{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
   .agent-graph{min-height:650px}
   .graph-node{width:142px;padding:10px}
   .graph-node-task{font-size:10.5px}
@@ -545,6 +551,7 @@ footer{
   .send-button{min-width:88px}
   .section{margin-top:22px}
   .agent-row.is-open .agent-detail{grid-template-columns:1fr}
+  .integration-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .graph-toolbar{align-items:center}
   .graph-toolbar h2{font-size:18px}
   .graph-copy{font-size:11px}

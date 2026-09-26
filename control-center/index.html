@@ -39,7 +39,7 @@
 
     <nav class="tabs" aria-label="Разделы Control Center">
       <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Обзор</button>
-      <button class="tab" type="button" data-tab="graph" aria-selected="false">Live Graph</button>
+      <button class="tab" type="button" data-tab="graph" aria-selected="false">Живая схема</button>
     </nav>
 
     <section id="overviewTab" class="tab-panel is-active" data-panel="overview">
@@ -92,7 +92,7 @@
         </section>
 
         <section class="section compact-section">
-          <div class="section-heading"><h2>Server Map</h2></div>
+          <div class="section-heading"><h2>Интеграции</h2></div>
           <div id="integrationMap" class="integration-grid"></div>
         </section>
       </div>
@@ -101,7 +101,7 @@
     <section id="graphTab" class="tab-panel" data-panel="graph" hidden>
       <div class="graph-toolbar">
         <div>
-          <h2>Live Graph</h2>
+          <h2>Живая схема</h2>
           <p class="graph-copy">Живая карта взаимодействий и текущей активности агентов.</p>
         </div>
         <div class="graph-status"><span class="pulse-dot"></span><span id="graphClock">Live</span></div>
@@ -136,9 +136,9 @@
 
     <footer>
       <span id="sourceLine">Источник: agent-status.json</span>
-      <span>NRAV autonomous development</span>
+      <span>Автономная разработка NRAV</span>
     </footer>
   </main>
-  <script type="module" src="./app.js?v=5"></script>
+  <script type="module" src="./app.js?v=6"></script>
 </body>
 </html>
