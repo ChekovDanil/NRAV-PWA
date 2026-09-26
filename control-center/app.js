@@ -179,7 +179,7 @@ function statusLabel(status) {
 }
 
 function scheduleLabel(agent) {
-  if (agent.id === "main") return "каждые ~15 мин";
+  if (agent.id === "main") return "каждые ~30 мин";
   const minutes = scheduleMap[agent.id] || [agent.scheduleMinute];
   return minutes
     .filter((minute) => Number.isFinite(minute))
@@ -190,7 +190,8 @@ function scheduleLabel(agent) {
 function initials(agent) {
   const aliases = {
     main: "M",
-    parallel: "R",
+    reverse: "R",
+    "status-sync": "SY",
     qa: "QA",
     product: "P",
     admin: "A",
@@ -208,7 +209,7 @@ function renderHealth(data) {
   const commits = data.agents.filter((agent) => agent.commit && agent.commit !== "—").length;
 
   nodes.health.innerHTML = [
-    '<article class="health-card primary-health"><div class="health-value">~15 мин</div><div class="health-label">Цикл Main</div><div class="health-meta">Последний сигнал: ' + escapeHtml(mainAge) + "</div></article>",
+    '<article class="health-card primary-health"><div class="health-value">~30 мин</div><div class="health-label">Цикл Main</div><div class="health-meta">Последний сигнал: ' + escapeHtml(mainAge) + "</div></article>",
     '<article class="health-card"><div class="health-value">' + active + '</div><div class="health-label">Активных агентов</div><div class="health-meta">из ' + data.agents.length + "</div></article>",
     '<article class="health-card"><div class="health-value">' + attention + '</div><div class="health-label">Нужно внимания</div><div class="health-meta">blocker / stale</div></article>',
     '<article class="health-card"><div class="health-value">' + commits + '</div><div class="health-label">Свежих веток</div><div class="health-meta">с подтверждённым commit</div></article>',
@@ -217,7 +218,7 @@ function renderHealth(data) {
 
 function renderAgents(data) {
   const sorted = [...data.agents].sort((a, b) => {
-    const order = ["main", "parallel", "qa", "product", "admin", "controller"];
+    const order = ["main", "reverse", "qa", "product", "admin", "controller", "status-sync"];
     return order.indexOf(a.id) - order.indexOf(b.id);
   });
 
