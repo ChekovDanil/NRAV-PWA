@@ -3,34 +3,38 @@ const PIN_CODE = "4351";
 const COMMAND_REPOSITORY = "ChekovDanil/NRAV";
 
 const scheduleMap = {
-  main: [8, 23, 38, 53],
-  parallel: [45],
-  qa: [28],
-  product: [58],
-  admin: [3],
-  controller: [18],
+  main: [0, 30],
+  reverse: [10],
+  qa: [20],
+  product: [40],
+  admin: [50],
+  controller: [5],
+  "status-sync": [55],
 };
 
 const graphPositions = {
   main: { x: 18, y: 31, vx: 180, vy: 211 },
-  parallel: { x: 82, y: 31, vx: 820, vy: 211 },
+  reverse: { x: 82, y: 31, vx: 820, vy: 211 },
   qa: { x: 16, y: 72, vx: 160, vy: 490 },
   product: { x: 84, y: 72, vx: 840, vy: 490 },
   admin: { x: 50, y: 13, vx: 500, vy: 88 },
-  controller: { x: 50, y: 88, vx: 500, vy: 598 },
+  controller: { x: 38, y: 88, vx: 380, vy: 598 },
+  "status-sync": { x: 64, y: 88, vx: 640, vy: 598 },
 };
 
 const graphConnections = [
   ["main", "core"],
-  ["parallel", "core"],
+  ["reverse", "core"],
   ["qa", "core"],
   ["product", "core"],
   ["admin", "core"],
   ["controller", "core"],
+  ["status-sync", "core"],
   ["qa", "main"],
   ["product", "main"],
   ["controller", "main"],
-  ["controller", "parallel"],
+  ["controller", "reverse"],
+  ["status-sync", "controller"],
 ];
 
 let currentData = null;
