@@ -191,13 +191,13 @@ function scheduleLabel(agent) {
 
 function initials(agent) {
   const aliases = {
-    main: "M",
-    reverse: "R",
-    "status-sync": "SY",
-    qa: "QA",
-    product: "P",
-    admin: "A",
-    controller: "C",
+    main: "Г",
+    reverse: "ОП",
+    "status-sync": "С",
+    qa: "КК",
+    product: "П",
+    admin: "А",
+    controller: "К",
   };
   return aliases[agent.id] || String(agent.shortName || agent.name || "?").slice(0, 2).toUpperCase();
 }
@@ -212,7 +212,7 @@ function renderHealth(data) {
   const commits = data.agents.filter((agent) => agent.commit && agent.commit !== "—").length;
 
   nodes.health.innerHTML = [
-    '<article class="health-card primary-health"><div class="health-value">~30 мин</div><div class="health-label">Цикл Main</div><div class="health-meta">Последний сигнал: ' + escapeHtml(mainAge) + "</div></article>",
+    '<article class="health-card primary-health"><div class="health-value">~30 мин</div><div class="health-label">Цикл главного агента</div><div class="health-meta">Последний сигнал: ' + escapeHtml(mainAge) + "</div></article>",
     '<article class="health-card"><div class="health-value">' + active + '</div><div class="health-label">Активных агентов</div><div class="health-meta">из ' + data.agents.length + "</div></article>",
     '<article class="health-card"><div class="health-value">' + recovering + '</div><div class="health-label">Исправляется</div><div class="health-meta">автоматически или ждёт сигнал</div></article>',
     '<article class="health-card' + (ownerAttention ? ' needs-owner' : '') + '"><div class="health-value">' + ownerAttention + '</div><div class="health-label">Нужен ваш ответ</div><div class="health-meta">только решения владельца</div></article>',
@@ -243,7 +243,7 @@ function renderAgents(data) {
           '<div class="agent-result">' + escapeHtml(agent.lastResult || "—") + "</div>" +
           '<div class="agent-detail">' +
             '<div><div class="label">Ветка</div><div class="value code">' + escapeHtml(agent.branch || "—") + "</div></div>" +
-            '<div><div class="label">Commit</div><div class="value code">' + escapeHtml(agent.commit || "—") + "</div></div>" +
+            '<div><div class="label">Коммит</div><div class="value code">' + escapeHtml(agent.commit || "—") + "</div></div>" +
             '<div><div class="label">Дальше</div><div class="value">' + escapeHtml(agent.next || "—") + "</div></div>" +
             blocker +
           "</div>" +
@@ -262,7 +262,7 @@ function timelineEntries(data) {
   data.agents.forEach((agent) => {
     const schedule = scheduleMap[agent.id] || [agent.scheduleMinute];
     schedule.forEach((minute) => {
-      if (Number.isFinite(minute)) entries.push({ minute, label: agent.id === "main" ? "Main" : (agent.shortName || agent.name) });
+      if (Number.isFinite(minute)) entries.push({ minute, label: agent.id === "main" ? "Главный" : (agent.shortName || agent.name) });
     });
   });
   return entries.sort((a, b) => a.minute - b.minute);
@@ -349,7 +349,7 @@ function renderGraph(data) {
       '<span class="graph-node-avatar">' + escapeHtml(initials(agent)) + '</span>' +
       '<span class="graph-node-copy">' +
         '<span class="graph-node-top"><strong>' + escapeHtml(agent.shortName || agent.name) + '</strong><i class="dot ' + status + '"></i></span>' +
-        '<span class="graph-node-role">' + escapeHtml(agent.role || "agent") + '</span>' +
+        '<span class="graph-node-role">' + escapeHtml(agent.role || "агент") + '</span>' +
         '<span class="graph-node-task">' + escapeHtml(agent.focus || "—") + '</span>' +
       '</span>' +
     '</button>';
@@ -379,7 +379,7 @@ function renderInspector(data, agentId) {
       '<div class="inspector-block"><div class="label">Сейчас</div><div class="value">' + escapeHtml(agent.focus || "—") + "</div></div>" +
       '<div class="inspector-block"><div class="label">Последний результат</div><div class="value">' + escapeHtml(agent.lastResult || "—") + "</div></div>" +
       '<div class="inspector-block"><div class="label">Дальше</div><div class="value">' + escapeHtml(agent.next || "—") + "</div></div>" +
-      '<div class="inspector-block"><div class="label">Ветка / commit</div><div class="value code">' + escapeHtml(agent.branch || "—") + "<br>" + escapeHtml(agent.commit || "—") + "</div></div>" +
+      '<div class="inspector-block"><div class="label">Ветка / коммит</div><div class="value code">' + escapeHtml(agent.branch || "—") + "<br>" + escapeHtml(agent.commit || "—") + "</div></div>" +
       (agent.blocker ? '<div class="inspector-block resolution-block"><div class="label">' + (agent.resolutionMode === "owner" ? "Нужен ваш ответ" : "Исправляется автоматически") + '</div><div class="value ' + (agent.resolutionMode === "owner" ? "error-inline" : "repair-inline") + '">' + escapeHtml(agent.blocker) + '</div>' + resolutionAction(agent) + "</div>" : "") +
     "</div>";
 }
@@ -388,11 +388,11 @@ function actionIssueUrl({ title, prompt }) {
   const url = new URL("https://github.com/" + COMMAND_REPOSITORY + "/issues/new");
   url.searchParams.set("title", title);
   url.searchParams.set("body", [
-    "## Поручение из NRAV Control Center",
+    "## Поручение из центра управления NRAV",
     "",
     prompt,
     "",
-    "Источник: control-center",
+    "Источник: центр управления",
     "Создано: " + new Date().toISOString(),
   ].join("\n"));
   return url.toString();
@@ -404,8 +404,8 @@ function resolutionAction(agent) {
   const label = needsOwner ? "Ответить / согласовать" : "Поручить исправление";
   const prompt = needsOwner
     ? "Нужно решение владельца по роли " + agent.name + ": " + agent.blocker
-    : "Автоматически устранить техническую проблему роли " + agent.name + ": " + agent.blocker + ". Сначала выполнить минимальные проверки, не расширять scope и сообщить результат по-русски.";
-  const href = actionIssueUrl({ title: "[NRAV CONTROL] " + label + ": " + agent.shortName, prompt });
+    : "Автоматически устранить техническую проблему роли " + agent.name + ": " + agent.blocker + ". Сначала выполнить минимальные проверки, не расширять объём работы и сообщить результат по-русски.";
+  const href = actionIssueUrl({ title: "[ЦЕНТР NRAV] " + label + ": " + agent.shortName, prompt });
   return '<a class="button resolution-action" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
 }
 
@@ -446,7 +446,7 @@ function renderDecisions(items) {
     const role = escapeHtml(item.role || item.agent || "NRAV");
     const href = item.issueUrl ? escapeHtml(item.issueUrl) : "";
     const actionHref = href || escapeHtml(actionIssueUrl({
-      title: "[NRAV CONTROL] Ответ владельца: " + (item.title || "решение"),
+      title: "[ЦЕНТР NRAV] Ответ владельца: " + (item.title || "решение"),
       prompt: "Ответить или согласовать: " + (item.title || "Нужно решение") + "\n\nКонтекст: " + (item.summary || item.reason || "Требуется решение владельца."),
     }));
     const action = '<a class="button subtle approval-link" href="' + actionHref + '" target="_blank" rel="noopener noreferrer">Ответить / согласовать</a>';
@@ -468,7 +468,7 @@ function notifyNewDecisions(items) {
   if (!fresh.length) return;
   const first = fresh[0];
   new Notification("NRAV: нужно согласование", {
-    body: first.title || first.summary || "Откройте Control Center.",
+    body: first.title || first.summary || "Откройте центр управления.",
   });
   fresh.forEach((item) => seen.add(decisionId(item)));
   localStorage.setItem("nrav-seen-decisions", JSON.stringify([...seen].slice(-100)));
@@ -533,7 +533,7 @@ function setupVoiceInput() {
   speechRecognition.onend = () => {
     nodes.voiceButton.classList.remove("is-listening");
     nodes.voiceLabel.textContent = "Голос";
-    nodes.commandHint.textContent = "Main проверит команду в ближайшем цикле";
+    nodes.commandHint.textContent = "Главный агент проверит команду в ближайшем цикле";
   };
 }
 
@@ -554,23 +554,23 @@ function handleCommandSubmit(event) {
   const prompt = nodes.commandInput.value.trim();
   if (!prompt) return;
   const compact = prompt.replace(/\s+/g, " ").slice(0, 72);
-  const title = "[NRAV CONTROL][MAIN] " + compact;
+  const title = "[ЦЕНТР NRAV][ГЛАВНЫЙ] " + compact;
   const body = [
-    "## NRAV Control Center command",
+    "## Поручение из центра управления NRAV",
     "",
-    "Target: Main",
-    "Created: " + new Date().toISOString(),
-    "Source: control-center",
+    "Цель: Главный агент",
+    "Создано: " + new Date().toISOString(),
+    "Источник: центр управления",
     "",
-    "### Prompt",
+    "### Поручение",
     prompt,
     "",
-    "> Команда должна приниматься агентом только если GitHub author — ChekovDanil.",
+    "> Агент принимает команду только от автора ChekovDanil в GitHub.",
   ].join("\n");
   const url = new URL("https://github.com/" + COMMAND_REPOSITORY + "/issues/new");
   url.searchParams.set("title", title);
   url.searchParams.set("body", body);
-  nodes.commandHint.textContent = "Открываю приватный GitHub. Проверь текст и нажми Create issue.";
+  nodes.commandHint.textContent = "Открываю приватный GitHub. Проверьте текст и нажмите кнопку создания задачи.";
   window.open(url.toString(), "_blank", "noopener,noreferrer");
 }
 
