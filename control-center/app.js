@@ -425,7 +425,7 @@ function emptyOverview(text) {
 
 function historyItems(data) {
   const source = Array.isArray(data.completed) ? data.completed : Array.isArray(data.history) ? data.history : [];
-  const raw = source.length ? source : data.agents.map((agent) => ({
+  const current = data.agents.map((agent) => ({
     id: agent.id + ":" + (agent.lastRun || ""),
     agent: agent.shortName || agent.name,
     completedAt: agent.lastRun,
@@ -433,6 +433,7 @@ function historyItems(data) {
     branch: agent.branch,
     commit: agent.commit,
   }));
+  const raw = [...source, ...current];
   const seen = new Set();
   return raw
     .map((item, index) => ({
