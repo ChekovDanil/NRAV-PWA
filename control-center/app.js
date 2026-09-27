@@ -38,6 +38,7 @@ const graphConnections = [
 ];
 
 let currentData = null;
+let currentSnapshotStale = false;
 let selectedAgentId = "main";
 let refreshTimer = null;
 let clockTimer = null;
@@ -163,6 +164,7 @@ function formatClock(iso) {
 }
 
 function effectiveStatus(agent) {
+  if (currentSnapshotStale) return "unknown";
   if (agent.blocker && agent.resolutionMode === "owner") return "blocked";
   if (agent.blocker && agent.resolutionMode === "automatic") return "recovering";
   const age = minutesSince(agent.lastRun);
@@ -177,6 +179,7 @@ function statusLabel(status) {
     waiting: "ожидает",
     recovering: "исправляется автоматически",
     blocked: "нужен ваш ответ",
+    unknown: "данные обновляются",
     stale: "нет сигнала",
   }[status] || status;
 }
@@ -204,6 +207,16 @@ function initials(agent) {
 }
 
 function renderHealth(data) {
+  if (currentSnapshotStale) {
+    const ownerAttention = data.agents.filter((agent) => agent.blocker && agent.resolutionMode === "owner").length;
+    nodes.health.innerHTML = [
+      '<article class="health-card primary-health"><div class="health-value">~30 мин</div><div class="health-label">Обычный цикл главного агента</div><div class="health-meta">расписание сохранено</div></article>',
+      '<article class="health-card"><div class="health-value">—</div><div class="health-label">Статус агентов обновляется</div><div class="health-meta">старый снимок не означает остановку</div></article>',
+      '<article class="health-card"><div class="health-value">1</div><div class="health-label">Нужна синхронизация</div><div class="health-meta">работа агентов может продолжаться</div></article>',
+      '<article class="health-card' + (ownerAttention ? ' needs-owner' : '') + '"><div class="health-value">' + ownerAttention + '</div><div class="health-label">Нужен ваш ответ</div><div class="health-meta">только подтверждённые решения</div></article>',
+    ].join("");
+    return;
+  }
   const statuses = data.agents.map(effectiveStatus);
   const active = statuses.filter((status) => status === "active").length;
   const ownerAttention = statuses.filter((status) => status === "blocked").length;
@@ -757,6 +770,8 @@ async function load() {
     const data = await response.json();
     if (!Array.isArray(data.agents)) throw new Error("Некорректный формат статуса");
     currentData = data;
+    const snapshotAge = minutesSince(data.generatedAt);
+    currentSnapshotStale = snapshotAge === null || snapshotAge > STALE_AFTER_MINUTES;
     renderHealth(data);
     renderOwnerOverview(data);
     renderAgents(data);
@@ -765,7 +780,9 @@ async function load() {
     renderDecisions(decisions);
     notifyNewDecisions(decisions);
     renderGraph(data);
-    nodes.snapshotAge.textContent = "снимок " + formatAge(minutesSince(data.generatedAt));
+    nodes.snapshotAge.textContent = currentSnapshotStale
+      ? "данные обновляются · снимок " + formatAge(snapshotAge)
+      : "снимок " + formatAge(snapshotAge);
     nodes.sourceLine.textContent = "Источник: " + data.repository + " · " + data.integrationBranch;
   } catch (error) {
     const message = escapeHtml(error instanceof Error ? error.message : "Неизвестная ошибка");
