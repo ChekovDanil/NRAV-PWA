@@ -179,6 +179,40 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
 .health-label{margin-top:3px;font-size:11px;color:var(--text-soft)}
 .health-meta{margin-top:5px;font-size:10.5px;color:var(--muted)}
 
+.owner-overview{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:18px;
+}
+.overview-column,.history-group{
+  min-width:0;
+  padding:18px;
+  border-radius:16px;
+  background:rgba(255,255,255,.026);
+}
+.overview-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.overview-title h2{font-size:18px}
+.overview-title span{color:var(--muted);font-size:10.5px}
+.now-grid,.next-list,.history-list{display:grid;gap:7px}
+.now-card,.next-item,.history-item{padding:12px 13px;border-radius:12px;background:rgba(255,255,255,.032)}
+.now-card.needs-owner{background:rgba(231,122,122,.08)}
+.now-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.now-card-head strong{font-size:12.5px}
+.now-card-head span{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:10.5px}
+.now-card p{margin:7px 0 0;color:var(--text-soft);font-size:12px;line-height:1.45}
+.now-note{margin-top:7px;color:var(--muted);font-size:10.5px;line-height:1.4}
+.next-item{display:grid;grid-template-columns:25px 1fr;gap:10px;align-items:start}
+.next-order{width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:rgba(113,141,255,.12);color:#cbd5ff;font-size:10.5px;font-weight:750}
+.next-meta,.history-meta{color:var(--muted);font-size:10px}
+.next-result,.history-result{margin-top:3px;color:var(--text-soft);font-size:12px;line-height:1.5}
+.history-board{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.history-meta{display:flex;justify-content:space-between;gap:8px}
+.technical-details{margin-top:9px;color:var(--muted);font-size:10px}
+.technical-details summary{cursor:pointer;user-select:none}
+.technical-details div{margin-top:6px;padding-top:6px;border-top:1px solid var(--hairline);font-family:"SFMono-Regular",Consolas,monospace;overflow-wrap:anywhere}
+.overview-empty{padding:16px 13px;border-radius:12px;background:rgba(255,255,255,.02);color:var(--muted);font-size:11px;line-height:1.5}
+
 .approval-panel{
   margin-top:12px;
   padding:14px 16px;
@@ -500,6 +534,8 @@ footer{
   .graph-layout{grid-template-columns:1fr}
   .graph-inspector{min-height:145px}
   .overview-bottom{grid-template-columns:1fr}
+  .owner-overview{grid-template-columns:1fr}
+  .history-board{grid-column:auto;grid-template-columns:1fr}
 }
 @media(max-width:760px){
   body{font-size:13px}
@@ -563,3 +599,4 @@ footer{
   .graph-node-task{font-size:10px}
   .activity-item{grid-template-columns:1fr;gap:2px;padding:9px 11px}
 }
+
