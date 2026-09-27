@@ -466,6 +466,24 @@ function renderHistoryGroup(title, items, emptyText) {
   return '<section class="history-group"><div class="overview-title"><h2>' + escapeHtml(title) + '</h2><span>' + items.length + '</span></div><div class="history-list">' + content + '</div></section>';
 }
 
+function renderSprints(data) {
+  const sprints = Array.isArray(data.sprints) ? data.sprints : [];
+  const cards = sprints.length ? sprints.map((sprint, index) => {
+    const tasks = Array.isArray(sprint.tasks) ? sprint.tasks : [];
+    const taskList = tasks.length
+      ? '<ul class="sprint-tasks">' + tasks.map((task) => '<li>' + escapeHtml(task) + '</li>').join("") + '</ul>'
+      : emptyOverview("Задачи этого этапа ещё уточняются.");
+    return '<article class="sprint-card' + (index === 0 ? ' is-current' : '') + '">' +
+      '<div class="sprint-head"><span class="sprint-number">' + (index + 1) + '</span><div><h3>' + escapeHtml(sprint.title || "Этап работы") + '</h3><div class="sprint-time">' + escapeHtml(sprint.window || "Срок уточняется") + '</div></div></div>' +
+      '<p class="sprint-goal">' + escapeHtml(sprint.goal || "Цель уточняется.") + '</p>' +
+      taskList +
+      '<div class="sprint-outcome"><span>Результат</span>' + escapeHtml(sprint.outcome || "Понятный проверенный результат без расширения объёма работ.") + '</div>' +
+    '</article>';
+  }).join("") : emptyOverview("План спринтов появится после следующей синхронизации статусов.");
+
+  return '<section class="sprints-section"><div class="overview-title"><h2>Спринты</h2><span>примерный план на неделю</span></div><p class="sprints-note">Сроки ориентировочные: если автоматическая проверка найдёт проблему, этап может сдвинуться без потери уже сделанного.</p><div class="sprint-grid">' + cards + '</div></section>';
+}
+
 function renderOwnerOverview(data) {
   const agents = Array.isArray(data.agents) ? data.agents : [];
   const nowCards = agents.map((agent) => {
@@ -506,6 +524,7 @@ function renderOwnerOverview(data) {
     '<div class="overview-column overview-next"><div class="overview-title"><h2>Дальше</h2><span>ближайший план</span></div><div class="next-list">' +
       (nextCards || emptyOverview("Новых шагов пока нет — команда ждёт следующий цикл.")) +
     '</div></div>' +
+    renderSprints(data) +
     '<div class="history-board">' +
       renderHistoryGroup("Сделано сегодня", today, "Сегодня завершённых результатов пока нет.") +
       renderHistoryGroup("Сделано вчера и позавчера", recent, "За эти два дня новых результатов нет.") +
