@@ -435,6 +435,7 @@ function historyItems(data) {
   }));
   const raw = [...source, ...current];
   const seen = new Set();
+  const seenMoments = new Set();
   return raw
     .map((item, index) => ({
       ...item,
@@ -444,8 +445,11 @@ function historyItems(data) {
       key: item.id || [item.completedAt, item.result, index].join(":"),
     }))
     .filter((item) => {
-      if (!item.completedAt || !item.result || seen.has(item.key)) return false;
+      const timestamp = Date.parse(item.completedAt);
+      const moment = Number.isNaN(timestamp) ? "" : item.agent + ":" + Math.floor(timestamp / 60000);
+      if (!item.completedAt || !item.result || seen.has(item.key) || (moment && seenMoments.has(moment))) return false;
       seen.add(item.key);
+      if (moment) seenMoments.add(moment);
       return true;
     })
     .sort((a, b) => Date.parse(b.completedAt) - Date.parse(a.completedAt));
