@@ -1,6 +1,10 @@
 const STALE_AFTER_MINUTES = 95;
 const PIN_CODE = "4351";
 const COMMAND_REPOSITORY = "ChekovDanil/NRAV";
+const STATUS_CACHE_KEY = "nrav-control-status-v1";
+const DECISIONS_CACHE_KEY = "nrav-control-decisions-v1";
+const RAW_DATA_BASE = "https://raw.githubusercontent.com/ChekovDanil/NRAV-PWA/main/control-center/data/";
+const FETCH_TIMEOUT_MS = 8000;
 
 const scheduleMap = {
   main: [0, 30],
@@ -39,6 +43,7 @@ const graphConnections = [
 
 let currentData = null;
 let currentSnapshotStale = false;
+let currentSnapshotSource = "основной канал";
 let selectedAgentId = "main";
 let refreshTimer = null;
 let clockTimer = null;
@@ -645,15 +650,86 @@ async function enableDecisionNotifications() {
   nodes.notifyApprovals.textContent = permission === "granted" ? "Уведомления ✓" : "Уведомления";
 }
 
-async function loadDecisions() {
+function readCachedJson(key) {
   try {
-    const response = await fetch("./data/decisions.json?t=" + Date.now(), { cache: "no-store" });
-    if (!response.ok) return [];
-    const data = await response.json();
-    return Array.isArray(data.decisions) ? data.decisions : [];
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
   } catch {
-    return [];
+    return null;
   }
+}
+
+function writeCachedJson(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // The board remains usable when browser storage is unavailable.
+  }
+}
+
+async function fetchJson(url) {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    const response = await fetch(url, { cache: "no-store", signal: controller.signal });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    return await response.json();
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+
+function isValidStatusSnapshot(data) {
+  if (!data || !Array.isArray(data.agents) || data.agents.length !== 7) return false;
+  const required = ["main", "reverse", "qa", "product", "admin", "controller", "status-sync"];
+  const ids = new Set(data.agents.map((agent) => agent.id));
+  const timestamp = Date.parse(data.generatedAt);
+  if (Number.isNaN(timestamp) || timestamp > Date.now() + 15 * 60000) return false;
+  return required.every((id) => ids.has(id));
+}
+
+async function loadStatusSnapshot() {
+  const stamp = Date.now();
+  const sources = [
+    { source: "основной канал", priority: 2, promise: fetchJson("./data/agent-status.json?t=" + stamp) },
+    { source: "резервный GitHub", priority: 1, promise: fetchJson(RAW_DATA_BASE + "agent-status.json?t=" + stamp) },
+  ];
+  const settled = await Promise.allSettled(sources.map((item) => item.promise));
+  const candidates = settled
+    .map((result, index) => result.status === "fulfilled"
+      ? { data: result.value, source: sources[index].source, priority: sources[index].priority }
+      : null)
+    .filter((item) => item && isValidStatusSnapshot(item.data));
+
+  const cached = readCachedJson(STATUS_CACHE_KEY);
+  if (isValidStatusSnapshot(cached)) {
+    candidates.push({ data: cached, source: "сохранённая копия", priority: 0 });
+  }
+  if (!candidates.length) throw new Error("нет доступного достоверного снимка");
+
+  candidates.sort((a, b) => {
+    const age = Date.parse(b.data.generatedAt) - Date.parse(a.data.generatedAt);
+    return age || b.priority - a.priority;
+  });
+  const selected = candidates[0];
+  if (selected.source !== "сохранённая копия") writeCachedJson(STATUS_CACHE_KEY, selected.data);
+  return selected;
+}
+
+async function loadDecisions() {
+  const stamp = Date.now();
+  const requests = [
+    fetchJson("./data/decisions.json?t=" + stamp),
+    fetchJson(RAW_DATA_BASE + "decisions.json?t=" + stamp),
+  ];
+  const settled = await Promise.allSettled(requests);
+  const live = settled
+    .filter((result) => result.status === "fulfilled" && Array.isArray(result.value?.decisions))
+    .map((result) => result.value);
+  const data = live[0] || readCachedJson(DECISIONS_CACHE_KEY);
+  if (!data || !Array.isArray(data.decisions)) return [];
+  if (live.length) writeCachedJson(DECISIONS_CACHE_KEY, data);
+  return data.decisions;
 }
 
 let speechRecognition = null;
@@ -762,13 +838,12 @@ async function load() {
   nodes.refreshButton.disabled = true;
   nodes.refreshButton.textContent = "…";
   try {
-    const [response, decisions] = await Promise.all([
-      fetch("./data/agent-status.json?t=" + Date.now(), { cache: "no-store" }),
+    const [statusSnapshot, decisions] = await Promise.all([
+      loadStatusSnapshot(),
       loadDecisions(),
     ]);
-    if (!response.ok) throw new Error("HTTP " + response.status);
-    const data = await response.json();
-    if (!Array.isArray(data.agents)) throw new Error("Некорректный формат статуса");
+    const data = statusSnapshot.data;
+    currentSnapshotSource = statusSnapshot.source;
     currentData = data;
     const snapshotAge = minutesSince(data.generatedAt);
     currentSnapshotStale = snapshotAge === null || snapshotAge > STALE_AFTER_MINUTES;
@@ -783,7 +858,7 @@ async function load() {
     nodes.snapshotAge.textContent = currentSnapshotStale
       ? "данные обновляются · снимок " + formatAge(snapshotAge)
       : "снимок " + formatAge(snapshotAge);
-    nodes.sourceLine.textContent = "Источник: " + data.repository + " · " + data.integrationBranch;
+    nodes.sourceLine.textContent = "Источник: " + data.repository + " · " + data.integrationBranch + " · " + currentSnapshotSource;
   } catch (error) {
     const message = escapeHtml(error instanceof Error ? error.message : "Неизвестная ошибка");
     nodes.health.innerHTML = '<article class="health-card"><div class="health-label error-inline">Не удалось загрузить телеметрию: ' + message + "</div></article>";
