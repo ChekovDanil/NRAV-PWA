@@ -321,6 +321,7 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
 .dot.waiting{background:var(--warn)}
 .dot.recovering{background:var(--warn);box-shadow:0 0 10px rgba(216,173,97,.2)}
 .dot.blocked{background:var(--bad)}
+.dot.unknown{background:#718097;box-shadow:0 0 0 3px rgba(113,128,151,.12)}
 .dot.stale{background:var(--stale)}
 
 .agent-table-head,.agent-row{
