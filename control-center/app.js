@@ -301,7 +301,7 @@ function renderIntegrationMap(data) {
     ["Частично", map.partial],
     ["Локально / демо", map.localOrMock],
     ["В работе", map.claimed],
-    ["Заблокировано", map.blocked],
+    ["Нужна доработка", map.blocked],
   ];
   nodes.integrationMap.innerHTML = entries
     .map(([label, value]) => (
