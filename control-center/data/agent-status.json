@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-27T16:01:52.999Z",
+  "generatedAt": "2026-09-27T16:07:20.259Z",
   "repository": "ChekovDanil/NRAV",
   "integrationBranch": "codex/local-development",
   "statusSource": "Действующие облачные чаты, фиксированные расписания и схема единственного писателя",
@@ -77,12 +77,12 @@
       "role": "Административное приложение",
       "status": "active",
       "scheduleMinute": 50,
-      "lastRun": "2026-09-27T15:49:20.297Z",
+      "lastRun": "2026-09-27T15:52:49.752Z",
       "focus": "Доработки админ-панели только через ветки codex/admin-*.",
-      "lastResult": "Админ-панель активна; работа ограничена отдельными ветками codex/admin-* и не конкурирует за integration или доску.",
-      "branch": "codex/local-development",
-      "commit": "76c2d79",
-      "next": "Подготовить один изолированный Admin commit для последовательной интеграции.",
+      "lastResult": "Штатный цикл Админ-панели создал один изолированный commit с дополнительной защитой браузера; integration и доска не затронуты.",
+      "branch": "codex/admin-origin-isolation",
+      "commit": "97e0460",
+      "next": "Передать готовый маленький кандидат Координатору для последовательной проверки и интеграции.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -162,6 +162,14 @@
     }
   ],
   "completed": [
+    {
+      "id": "2026-09-27-admin-origin-isolation",
+      "agent": "Админ-панель",
+      "completedAt": "2026-09-27T15:52:49.752Z",
+      "result": "Админ-панель получила дополнительную защиту между окнами и внешними ресурсами; изменение сохранено отдельным небольшим commit и готово для проверки Координатором.",
+      "branch": "codex/admin-origin-isolation",
+      "commit": "97e0460"
+    },
     {
       "id": "2026-09-27-single-writer-board-resilience",
       "agent": "Координатор",
@@ -360,6 +368,8 @@
     "activeCloudDuplicates": 0,
     "schedulerNote": "Плановая минута — ориентир начала; облачный запуск может стартовать с небольшой задержкой очереди.",
     "lastObservedCloudCycleAt": "2026-09-27T16:01:15.899Z",
-    "lastObservedCloudCycle": "Главный агент A штатно запустился в :00 и завершил цикл без зависания."
+    "lastObservedCloudCycle": "Главный агент A штатно запустился в :00 и завершил цикл без зависания.",
+    "verifiedRoleWriteAt": "2026-09-27T15:52:49.752Z",
+    "verifiedRoleWrite": "Админ-панель успешно записала один атомарный commit только в своей ролевой ветке."
   }
 }
