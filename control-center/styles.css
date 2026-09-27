@@ -212,6 +212,21 @@ h3{margin:0;font-size:16px;font-weight:700;letter-spacing:-.02em}
 .technical-details summary{cursor:pointer;user-select:none}
 .technical-details div{margin-top:6px;padding-top:6px;border-top:1px solid var(--hairline);font-family:"SFMono-Regular",Consolas,monospace;overflow-wrap:anywhere}
 .overview-empty{padding:16px 13px;border-radius:12px;background:rgba(255,255,255,.02);color:var(--muted);font-size:11px;line-height:1.5}
+.sprints-section{grid-column:1/-1;padding:18px;border-radius:16px;background:linear-gradient(135deg,rgba(113,141,255,.07),rgba(255,255,255,.022) 48%,rgba(198,167,102,.045))}
+.sprints-note{margin:-5px 0 13px;color:var(--muted);font-size:10.5px;line-height:1.45}
+.sprint-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.sprint-card{min-width:0;padding:14px;border-radius:13px;background:rgba(11,13,16,.54);box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}
+.sprint-card.is-current{background:linear-gradient(145deg,rgba(113,141,255,.12),rgba(11,13,16,.62) 58%)}
+.sprint-head{display:flex;align-items:center;gap:10px}
+.sprint-number{width:27px;height:27px;display:grid;place-items:center;flex:0 0 auto;border-radius:9px;background:rgba(255,255,255,.055);color:#dce4ff;font-size:11px;font-weight:800}
+.sprint-head h3{font-size:13px}
+.sprint-time{margin-top:1px;color:var(--gold);font-size:10px}
+.sprint-goal{min-height:38px;margin:10px 0 8px;color:var(--text-soft);font-size:12px;line-height:1.5}
+.sprint-tasks{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.sprint-tasks li{position:relative;padding-left:13px;color:var(--muted);font-size:10.5px;line-height:1.4}
+.sprint-tasks li::before{content:"";position:absolute;left:0;top:.48em;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.sprint-outcome{margin-top:11px;padding-top:9px;border-top:1px solid var(--hairline);color:var(--text-soft);font-size:10.5px;line-height:1.45}
+.sprint-outcome span{display:block;margin-bottom:3px;color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
 
 .approval-panel{
   margin-top:12px;
@@ -535,6 +550,8 @@ footer{
   .graph-inspector{min-height:145px}
   .overview-bottom{grid-template-columns:1fr}
   .owner-overview{grid-template-columns:1fr}
+  .sprints-section{grid-column:auto}
+  .sprint-grid{grid-template-columns:1fr}
   .history-board{grid-column:auto;grid-template-columns:1fr}
 }
 @media(max-width:760px){
