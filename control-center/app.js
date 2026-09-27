@@ -55,6 +55,7 @@ const nodes = {
   voiceButton: document.querySelector("#voiceButton"),
   voiceLabel: document.querySelector("#voiceLabel"),
   health: document.querySelector("#health"),
+  ownerOverview: document.querySelector("#ownerOverview"),
   agents: document.querySelector("#agents"),
   timeline: document.querySelector("#timeline"),
   integrationMap: document.querySelector("#integrationMap"),
@@ -384,6 +385,129 @@ function renderInspector(data, agentId) {
     "</div>";
 }
 
+function startOfLocalDay(value = new Date()) {
+  const date = new Date(value);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+function dayDistance(iso) {
+  const time = Date.parse(iso);
+  if (Number.isNaN(time)) return null;
+  return Math.floor((startOfLocalDay() - startOfLocalDay(time)) / 86400000);
+}
+
+function nextRunAt(agent) {
+  const minutes = scheduleMap[agent.id] || [agent.scheduleMinute];
+  const now = new Date();
+  const candidates = minutes
+    .filter(Number.isFinite)
+    .map((minute) => {
+      const date = new Date(now);
+      date.setMinutes(minute, 0, 0);
+      if (date <= now) date.setHours(date.getHours() + 1);
+      return date;
+    });
+  return candidates.sort((a, b) => a - b)[0] || null;
+}
+
+function technicalDetails(item) {
+  const parts = [];
+  if (item.branch) parts.push("Ветка: " + escapeHtml(item.branch));
+  if (item.commit) parts.push("Версия: " + escapeHtml(item.commit));
+  if (!parts.length) return "";
+  return '<details class="technical-details"><summary>Технические детали</summary><div>' + parts.join("<br>") + "</div></details>";
+}
+
+function emptyOverview(text) {
+  return '<div class="overview-empty">' + escapeHtml(text) + "</div>";
+}
+
+function historyItems(data) {
+  const source = Array.isArray(data.completed) ? data.completed : Array.isArray(data.history) ? data.history : [];
+  const raw = source.length ? source : data.agents.map((agent) => ({
+    id: agent.id + ":" + (agent.lastRun || ""),
+    agent: agent.shortName || agent.name,
+    completedAt: agent.lastRun,
+    result: agent.lastResult,
+    branch: agent.branch,
+    commit: agent.commit,
+  }));
+  const seen = new Set();
+  return raw
+    .map((item, index) => ({
+      ...item,
+      completedAt: item.completedAt || item.date || item.lastRun,
+      result: item.result || item.lastResult || item.summary,
+      agent: item.agent || item.role || "Команда NRAV",
+      key: item.id || [item.completedAt, item.result, index].join(":"),
+    }))
+    .filter((item) => {
+      if (!item.completedAt || !item.result || seen.has(item.key)) return false;
+      seen.add(item.key);
+      return true;
+    })
+    .sort((a, b) => Date.parse(b.completedAt) - Date.parse(a.completedAt));
+}
+
+function renderHistoryGroup(title, items, emptyText) {
+  const content = items.length ? items.map((item) => (
+    '<article class="history-item">' +
+      '<div class="history-meta"><span>' + escapeHtml(formatClock(item.completedAt)) + '</span><span>' + escapeHtml(item.agent) + "</span></div>" +
+      '<div class="history-result">' + escapeHtml(item.result) + "</div>" +
+      technicalDetails(item) +
+    "</article>"
+  )).join("") : emptyOverview(emptyText);
+  return '<section class="history-group"><div class="overview-title"><h2>' + escapeHtml(title) + '</h2><span>' + items.length + '</span></div><div class="history-list">' + content + '</div></section>';
+}
+
+function renderOwnerOverview(data) {
+  const agents = Array.isArray(data.agents) ? data.agents : [];
+  const nowCards = agents.map((agent) => {
+    const status = effectiveStatus(agent);
+    const needsOwner = status === "blocked";
+    const note = agent.blocker
+      ? (needsOwner ? "Нужен ваш ответ: " : "Команда исправляет сама: ") + agent.blocker
+      : "Работа идёт по плану.";
+    return '<article class="now-card' + (needsOwner ? " needs-owner" : "") + '">' +
+      '<div class="now-card-head"><strong>' + escapeHtml(agent.shortName || agent.name) + '</strong><span><i class="dot ' + status + '"></i>' + escapeHtml(statusLabel(status)) + "</span></div>" +
+      '<p>' + escapeHtml(agent.focus || "Ожидает следующего шага.") + "</p>" +
+      '<div class="now-note">' + escapeHtml(note) + "</div>" +
+    "</article>";
+  }).join("");
+
+  const nextCards = agents
+    .map((agent) => ({ agent, at: nextRunAt(agent) }))
+    .filter((item) => item.agent.next)
+    .sort((a, b) => a.at - b.at)
+    .map(({ agent, at }, index) => (
+      '<article class="next-item"><div class="next-order">' + (index + 1) + '</div><div><div class="next-meta">' +
+        escapeHtml(agent.shortName || agent.name) + (at ? " · примерно в " + escapeHtml(new Intl.DateTimeFormat("ru-RU", { hour: "2-digit", minute: "2-digit" }).format(at)) : "") +
+        '</div><div class="next-result">' + escapeHtml(agent.next) + "</div></div></article>"
+    )).join("");
+
+  const history = historyItems(data);
+  const today = history.filter((item) => dayDistance(item.completedAt) === 0);
+  const recent = history.filter((item) => [1, 2].includes(dayDistance(item.completedAt)));
+  const week = history.filter((item) => {
+    const days = dayDistance(item.completedAt);
+    return days !== null && days >= 3 && days <= 7;
+  });
+
+  nodes.ownerOverview.innerHTML =
+    '<div class="overview-column overview-now"><div class="overview-title"><h2>Сейчас</h2><span>чем занята команда</span></div><div class="now-grid">' +
+      (nowCards || emptyOverview("Сейчас активных задач нет.")) +
+    '</div></div>' +
+    '<div class="overview-column overview-next"><div class="overview-title"><h2>Дальше</h2><span>ближайший план</span></div><div class="next-list">' +
+      (nextCards || emptyOverview("Новых шагов пока нет — команда ждёт следующий цикл.")) +
+    '</div></div>' +
+    '<div class="history-board">' +
+      renderHistoryGroup("Сделано сегодня", today, "Сегодня завершённых результатов пока нет.") +
+      renderHistoryGroup("Сделано вчера и позавчера", recent, "За эти два дня новых результатов нет.") +
+      renderHistoryGroup("Сделано за последние 7 дней", week, "Более ранних результатов за неделю нет.") +
+    "</div>";
+}
+
 function actionIssueUrl({ title, prompt }) {
   const url = new URL("https://github.com/" + COMMAND_REPOSITORY + "/issues/new");
   url.searchParams.set("title", title);
@@ -610,6 +734,7 @@ async function load() {
     if (!Array.isArray(data.agents)) throw new Error("Некорректный формат статуса");
     currentData = data;
     renderHealth(data);
+    renderOwnerOverview(data);
     renderAgents(data);
     renderTimeline(data);
     renderIntegrationMap(data);
@@ -646,3 +771,4 @@ if (sessionStorage.getItem("nrav-control-unlocked") === "1") {
 } else {
   lock();
 }
+
