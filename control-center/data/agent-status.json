@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-28T09:50:11Z",
+  "generatedAt": "2026-09-28T17:53:44Z",
   "repository": "ChekovDanil/NRAV",
   "integrationBranch": "codex/local-development",
-  "statusSource": "Свежий SHA NRAV-PWA + AGENTS.md + Live Graph + актуальное состояние automation + codex/local-development и ролевые ветки/commits + точный поиск открытых [NRAV DECISION]",
+  "statusSource": "Свежий SHA NRAV-PWA + AGENTS.md + актуальное состояние automation + codex/local-development, commits/ветки и координационные checkpoint-файлы + точный поиск открытых [NRAV DECISION]. Отдельные versioned telemetry JSON/Live Graph в свежем дереве NRAV не обнаружены.",
   "staleAfterMinutes": 95,
   "agents": [
     {
@@ -13,12 +13,12 @@
       "role": "Основная разработка: Главный агент A и B показаны как один логический агент",
       "status": "active",
       "scheduleMinute": 0,
-      "lastRun": "2026-09-28T09:29:43.089306Z",
+      "lastRun": "2026-09-28T17:35:52.653431Z",
       "focus": "Два исполнителя готовят небольшие изменения только в собственных ролевых ветках.",
-      "lastResult": "Свежий integration HEAD — b4c9c7e. После новых запусков Главного агента A и B более нового Main-owned commit после 6eab219 не подтверждено; последний общий MAIN_CHECKPOINT.md по-прежнему фиксирует Functional HEAD 2c7df7f и не подменяет свежий integration.",
+      "lastResult": "Главный агент A+B активен. Свежий integration HEAD — 6a5c929; более нового подтверждённого Main-owned результата поверх integration в текущей сверке не обнаружено. Общий Main checkpoint старее integration и используется только как контекст claims.",
       "branch": "codex/local-development",
       "commit": "6eab219",
-      "next": "Подготовить следующий маленький проверенный commit в ролевой ветке и передать его Координатору.",
+      "next": "Продолжать только после свежего reread HEAD/AGENTS/claims; один небольшой атомарный ролевой commit за цикл, интеграцию выполняет Координатор.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -29,12 +29,12 @@
       "role": "Проверка и подключение оставшихся клиентских сценариев",
       "status": "active",
       "scheduleMinute": 10,
-      "lastRun": "2026-09-28T09:14:41.953430Z",
+      "lastRun": "2026-09-28T17:18:49.739546Z",
       "focus": "Подключение пользовательских настроек уведомлений через существующий gateway без локального fallback.",
-      "lastResult": "Последний подтверждённый Reverse commit остаётся 9fa2327 в codex/reverse-channel-notifications-v3. В свежем integration HEAD b4c9c7e этот commit не подтверждён как интегрированный; после нового запуска более свежего завершённого Reverse commit не подтверждено.",
-      "branch": "codex/reverse-channel-notifications-v3",
-      "commit": "9fa2327",
-      "next": "На следующем цикле перечитать свежий integration/claims и продолжить независимый reverse-блок; готовый commit остаётся кандидатом для Координатора.",
+      "lastResult": "После integration 6a5c929 подтверждены две Reverse-ветки ahead by 1: codex/reverse-group-notifications-v2 (ba09bea, один файл) и codex/reverse-channel-notifications-v4 (deb9a32, commit затрагивает 300 файлов). Массовый deb9a32 не считать безопасным кандидатом без отдельной проверки Координатора.",
+      "branch": "codex/reverse-channel-notifications-v4",
+      "commit": "deb9a32e77d16f3006167289051d72cf3152a8f2",
+      "next": "Координатору рассматривать максимум один атомарный безопасный Reverse-кандидат после свежего readback; deb9a32 не интегрировать без подтверждения.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -45,12 +45,12 @@
       "role": "Независимая проверка изменений",
       "status": "active",
       "scheduleMinute": 20,
-      "lastRun": "2026-09-28T09:22:36.857632Z",
+      "lastRun": "2026-09-28T17:26:10.984043Z",
       "focus": "Независимая QA-проверка гонок, UI↔API и серверного состояния после свежих интеграций.",
-      "lastResult": "В integration подтверждён QA commit 7699c4c: исправлены гонки закладок событий. Свежий общий integration HEAD — b4c9c7e; после нового QA-запуска более свежего завершённого QA commit не подтверждено.",
-      "branch": "codex/qa-event-bookmark-race-v4",
-      "commit": "7699c4c",
-      "next": "Перечитать свежие claims и продолжить следующий независимый QA-блок без пересечения с занятыми областями.",
+      "lastResult": "QA-результат «Изолировать закладки событий по сессии» подтверждён в integration как 2bd8ad0; более нового отдельного QA commit поверх текущего integration в свежем чтении не подтверждено.",
+      "branch": "codex/qa-event-bookmark-session-scope-v3",
+      "commit": "2bd8ad0eb8278a09f99b2c97577e7fd61112e7e0",
+      "next": "Продолжать следующий независимый QA-блок после свежего reread HEAD/AGENTS/claims.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -61,12 +61,12 @@
       "role": "Продуктовое и визуальное качество",
       "status": "active",
       "scheduleMinute": 40,
-      "lastRun": "2026-09-28T09:41:38.842809Z",
+      "lastRun": "2026-09-28T17:40:20.701804Z",
       "focus": "Продуктовые улучшения только через ветки codex/product-*.",
-      "lastResult": "После свежего запуска нового подтверждённого Product-owned commit не обнаружено. Свежий integration HEAD — b4c9c7e; прежний достоверный продуктовый checkpoint сохранён.",
+      "lastResult": "Контроль продукта активен; открытых [NRAV DECISION] нет. Репозиторный Product checkpoint отмечает Partial для поиска и регистрации и не требует нового решения владельца; нового подтверждённого Product-owned commit поверх integration в этой сверке не найдено.",
       "branch": "codex/local-development",
       "commit": "dd1bb23",
-      "next": "Подготовить один понятный пользовательский результат и передать Координатору.",
+      "next": "Продолжать read-only продуктовую сверку либо один небольшой безопасный UX/UI-блок вне claims.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -77,12 +77,12 @@
       "role": "Административное приложение",
       "status": "active",
       "scheduleMinute": 50,
-      "lastRun": "2026-09-28T08:53:05.180921Z",
+      "lastRun": "2026-09-28T16:55:06.919223Z",
       "focus": "Доработки админ-панели только через ветки codex/admin-*.",
-      "lastResult": "В свежем integration HEAD b4c9c7e подтверждены два новых Admin-результата: b3403e0 запрещает кэширование корня админ-панели, b4c9c7e скрывает служебный заголовок Next.js.",
-      "branch": "codex/admin-hide-powered-by",
-      "commit": "b4c9c7e",
-      "next": "Продолжить один небольшой безопасный admin-блок в ролевой ветке и передать готовый результат Координатору.",
+      "lastResult": "Свежий подтверждённый Admin-результат в integration — 6a5c929 «Включить HSTS для админ-панели»; перед ним интегрированы 75c9c1a и 6c120264. Более нового Admin commit поверх integration не подтверждено.",
+      "branch": "codex/admin-hsts",
+      "commit": "6a5c92908532517df773c199bf7882cd31c382e6",
+      "next": "Продолжать только небольшой независимый admin-блок после свежего reread HEAD/AGENTS/claims; без нового backend.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -93,12 +93,12 @@
       "role": "Координация потока работ",
       "status": "active",
       "scheduleMinute": 5,
-      "lastRun": "2026-09-28T09:05:40.900068Z",
+      "lastRun": "2026-09-28T17:08:37.927400Z",
       "focus": "Контроль единственного интеграционного писателя NRAV и готовых ролевых кандидатов.",
-      "lastResult": "Все восемь основных расписаний активны. В Control Center сохраняются ровно семь логических узлов; Главный агент A и B агрегированы как один Главный агент. После свежего цикла Координатора integration HEAD остаётся b4c9c7e.",
-      "branch": null,
-      "commit": null,
-      "next": "Продолжать выбирать не более одного завершённого безопасного ролевого кандидата за цикл после свежего reread HEAD/AGENTS/claims.",
+      "lastResult": "Все 8 основных расписаний активны. Свежий integration HEAD — 6a5c929. Открытых issue с точным префиксом [NRAV DECISION] нет. Reverse-кандидаты требуют последовательного выбора максимум одного безопасного кандидата.",
+      "branch": "codex/local-development",
+      "commit": "6a5c92908532517df773c199bf7882cd31c382e6",
+      "next": "На следующем цикле перечитать HEAD/AGENTS/claims и выбрать максимум один завершённый безопасный ролевой кандидат.",
       "blocker": null,
       "resolutionMode": "automatic"
     },
@@ -110,12 +110,12 @@
       "isService": true,
       "status": "active",
       "scheduleMinute": 55,
-      "lastRun": "2026-09-28T09:50:11Z",
+      "lastRun": "2026-09-28T17:53:44Z",
       "focus": "Последовательная синхронизация единственного публичного Control Center по подтверждённым фактам.",
-      "lastResult": "Сверены свежие SHA, AGENTS.md, automation state, integration, общий Main checkpoint и решения: integration HEAD b4c9c7e, все 8 основных расписаний активны, открытых issue с точным префиксом [NRAV DECISION] нет. После предыдущего снимка новых подтверждённых repository commits не появилось.",
+      "lastResult": "Сверены 7 логических узлов, 8 из 8 основных расписаний активны, integration HEAD — 6a5c929, открытых [NRAV DECISION] нет. decisions.json не требует изменения.",
       "branch": "NRAV-PWA/main",
       "commit": null,
-      "next": "На следующем штатном цикле снова начать со свежего SHA и публиковать только подтверждённые изменения.",
+      "next": "Следующий штатный цикл: свежий SHA доски → подтверждённые факты → один последовательный publish-проход.",
       "blocker": null,
       "resolutionMode": "automatic"
     }
@@ -392,6 +392,38 @@
       "result": "Админ-панель больше не раскрывает служебный заголовок Next.js.",
       "branch": "codex/admin-hide-powered-by",
       "commit": "b4c9c7ea61fb8c5caf5c9d932e2cd034ca8a82df"
+    },
+    {
+      "id": "2026-09-28-qa-event-bookmark-session-scope",
+      "agent": "Контроль качества",
+      "completedAt": "2026-09-28T09:22:07Z",
+      "result": "Закладки событий изолированы по сессии, чтобы состояние одного входа не протекало в другой.",
+      "branch": "codex/qa-event-bookmark-session-scope-v3",
+      "commit": "2bd8ad0eb8278a09f99b2c97577e7fd61112e7e0"
+    },
+    {
+      "id": "2026-09-28-admin-force-dynamic-root",
+      "agent": "Админ-панель",
+      "completedAt": "2026-09-28T10:52:53Z",
+      "result": "Отключена статическая генерация корня админ-панели.",
+      "branch": "codex/admin-force-dynamic-root-v2",
+      "commit": "6c1202646e7ba7daca744572094f66152de83a5f"
+    },
+    {
+      "id": "2026-09-28-admin-no-store-all-routes",
+      "agent": "Админ-панель",
+      "completedAt": "2026-09-28T13:00:41Z",
+      "result": "Запрещено кеширование всех маршрутов админ-панели.",
+      "branch": "codex/admin-no-store-all-routes",
+      "commit": "75c9c1a05b3ca0ce6c35c25ec95a2e11f57b3064"
+    },
+    {
+      "id": "2026-09-28-admin-hsts",
+      "agent": "Админ-панель",
+      "completedAt": "2026-09-28T14:51:07Z",
+      "result": "Для админ-панели включён HSTS.",
+      "branch": "codex/admin-hsts",
+      "commit": "6a5c92908532517df773c199bf7882cd31c382e6"
     }
   ],
   "serverIntegrationMap": {
@@ -409,14 +441,15 @@
       "Последняя сохранённая копия браузера"
     ],
     "staleBehavior": "Устаревший снимок показывается как задержка синхронизации, а не остановка агентов",
-    "lastTopologyCheckAt": "2026-09-28T09:50:11Z",
+    "lastTopologyCheckAt": "2026-09-28T17:53:44Z",
     "activeSchedules": "8 из 8",
     "activeLegacyDuplicates": 0,
     "activeCloudDuplicates": 0,
     "schedulerNote": "Плановая минута — ориентир начала; облачный запуск может стартовать с небольшой задержкой очереди.",
-    "lastObservedCloudCycleAt": "2026-09-28T09:41:38.842809Z",
-    "lastObservedCloudCycle": "Последний завершённый наблюдаемый штатный цикл — Контроль продукта; текущий Admin-цикл ещё не подтверждён свежим automation state.",
-    "verifiedRoleWriteAt": "2026-09-28T07:49:54Z",
-    "verifiedRoleWrite": "Последний подтверждённый repository commit остаётся Admin b4c9c7e; перед ним b3403e0. Reverse 9fa2327 остаётся готовым, но не подтверждён как интегрированный."
-  }
+    "lastObservedCloudCycleAt": "2026-09-28T17:40:20.701804Z",
+    "lastObservedCloudCycle": "Последний подтверждённый завершённый цикл перед синхронизацией — Контроль продукта.",
+    "verifiedRoleWriteAt": "2026-09-28T14:51:07Z",
+    "verifiedRoleWrite": "Последний подтверждённый integration commit — Admin 6a5c929; перед ним 75c9c1a, 6c120264 и QA 2bd8ad0."
+  },
+  "pendingOwnerDecisions": 0
 }
