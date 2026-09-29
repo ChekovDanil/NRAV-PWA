@@ -4,145 +4,34 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0d10" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>NRAV — Центр управления</title>
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="stylesheet" href="./styles.css?v=9" />
+  <title>NRAV — автономная работа остановлена</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0b0d10; color: #f5f7fa; padding: 24px; }
+    main { width: min(680px, 100%); padding: 36px; border: 1px solid #242a32; border-radius: 24px; background: #11151a; box-shadow: 0 24px 80px rgba(0,0,0,.32); }
+    .brand { color: #d7bd72; font-weight: 800; letter-spacing: .22em; margin-bottom: 36px; }
+    .state { display: inline-flex; align-items: center; gap: 10px; color: #d9dde3; font-size: 14px; margin-bottom: 18px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #8b939e; box-shadow: 0 0 0 5px rgba(139,147,158,.12); }
+    h1 { margin: 0 0 16px; font-size: clamp(30px, 6vw, 52px); line-height: 1.05; letter-spacing: -.035em; }
+    p { margin: 0; color: #aeb6c1; font-size: 17px; line-height: 1.65; }
+    .facts { display: grid; gap: 12px; margin-top: 30px; }
+    .fact { padding: 16px 18px; border-radius: 14px; background: #171c22; color: #dce1e7; }
+    .note { margin-top: 28px; padding-top: 24px; border-top: 1px solid #242a32; font-size: 14px; color: #7f8995; }
+  </style>
 </head>
 <body>
-  <section id="pinGate" class="pin-gate" aria-labelledby="pinTitle">
-    <form id="pinForm" class="pin-card">
-      <img class="pin-logo" src="./assets/nrav-wordmark.svg" alt="NRAV" />
-      <h1 id="pinTitle">Центр управления</h1>
-      <p class="muted pin-copy">Введите код доступа</p>
-      <label class="sr-only" for="pinInput">Код доступа</label>
-      <input id="pinInput" class="pin-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="one-time-code" placeholder="••••" required />
-      <button class="button primary wide" type="submit">Войти</button>
-      <p id="pinError" class="pin-error" role="alert" aria-live="polite"></p>
-    </form>
-  </section>
-
-  <main id="appShell" class="shell is-locked" aria-hidden="true">
-    <header class="app-header">
-      <div class="brand">
-        <img class="brand-logo" src="./assets/nrav-wordmark.svg" alt="NRAV" />
-        <div class="brand-meta">
-          <div class="brand-title">Центр управления</div>
-          <div class="brand-subtitle"><span id="snapshotAge">загрузка…</span></div>
-        </div>
-      </div>
-      <div class="topbar-actions">
-        <button id="refreshButton" class="icon-button" type="button" aria-label="Обновить данные" title="Обновить">↻</button>
-        <button id="lockButton" class="text-button" type="button">Выйти</button>
-      </div>
-    </header>
-
-    <nav class="tabs" aria-label="Разделы центра управления">
-      <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Обзор</button>
-      <button class="tab" type="button" data-tab="graph" aria-selected="false">Агенты</button>
-    </nav>
-
-    <section id="overviewTab" class="tab-panel is-active" data-panel="overview">
-      <section id="health" class="health-strip" aria-live="polite"></section>
-
-      <section id="ownerOverview" class="owner-overview" aria-label="Работа команды"></section>
-
-      <section id="approvalPanel" class="approval-panel">
-        <div class="approval-head">
-          <div class="approval-heading">Нужно согласовать <span id="approvalCount" class="count-badge">0</span></div>
-          <button id="notifyApprovals" class="text-button" type="button">Уведомления</button>
-        </div>
-        <div id="approvalList" class="approval-list">
-          <div class="muted">Загрузка…</div>
-        </div>
-      </section>
-
-      <section class="command-panel" aria-label="Команда основному разработчику">
-        <form id="commandForm" class="command-form">
-          <label for="commandInput" class="sr-only">Поручение основному разработчику</label>
-          <textarea id="commandInput" maxlength="4000" rows="3" placeholder="Напишите или продиктуйте команду основному разработчику…" required></textarea>
-          <div class="command-actions">
-            <button id="voiceButton" class="voice-button" type="button" aria-label="Продиктовать команду">
-              <span class="voice-icon" aria-hidden="true">●</span>
-              <span id="voiceLabel">Голос</span>
-            </button>
-            <span id="commandHint" class="command-hint">Главный агент проверит команду в ближайшем цикле</span>
-            <button class="button primary send-button" type="submit">Отправить</button>
-          </div>
-        </form>
-      </section>
-
-      <section class="section agents-section">
-        <div class="section-heading">
-          <h2>Агенты</h2>
-          <div class="status-legend" aria-label="Легенда статусов">
-            <span><i class="dot active"></i>активен</span>
-            <span><i class="dot waiting"></i>ожидает</span>
-            <span><i class="dot unknown"></i>данные обновляются</span>
-            <span><i class="dot blocked"></i>нужен ваш ответ</span>
-          </div>
-        </div>
-        <div class="agent-table-head" aria-hidden="true">
-          <span>Агент</span><span>Статус</span><span>Последний сигнал</span><span>Результат</span>
-        </div>
-        <div id="agents" class="agent-list"></div>
-      </section>
-
-      <div class="overview-bottom">
-        <section class="section compact-section">
-          <div class="section-heading"><h2>Цикл работы</h2></div>
-          <div id="timeline" class="timeline" aria-label="Расписание агентов"></div>
-        </section>
-
-        <section class="section compact-section">
-          <div class="section-heading"><h2>Интеграции</h2></div>
-          <div id="integrationMap" class="integration-grid"></div>
-        </section>
-      </div>
-    </section>
-
-    <section id="graphTab" class="tab-panel" data-panel="graph" hidden>
-      <div class="graph-toolbar">
-        <div>
-          <h2>Агенты</h2>
-          <p class="graph-copy">Кто сейчас работает, над чем и какой результат получил.</p>
-        </div>
-        <div class="graph-status"><span class="pulse-dot"></span><span id="graphClock">сейчас</span></div>
-      </div>
-
-      <div class="graph-layout">
-        <div id="agentGraph" class="agent-graph" role="application" aria-label="Интерактивная карта агентов">
-          <div class="neural-haze haze-a"></div>
-          <div class="neural-haze haze-b"></div>
-          <svg id="graphLines" class="graph-lines" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true"></svg>
-          <div id="graphNodes" class="graph-nodes"></div>
-          <div class="core-node" aria-hidden="true">
-            <span class="core-orbit orbit-a"></span>
-            <span class="core-orbit orbit-b"></span>
-            <img src="./assets/nrav-wordmark.svg" alt="" />
-            <small>центр</small>
-          </div>
-        </div>
-
-        <aside id="graphInspector" class="graph-inspector" aria-live="polite">
-          <div class="inspector-kicker">Агент</div>
-          <h3>Выберите узел</h3>
-          <p class="muted">Здесь появятся текущая задача, результат и следующий шаг.</p>
-        </aside>
-      </div>
-
-      <section class="activity-feed">
-        <div class="section-heading"><h2>Последняя активность</h2></div>
-        <div id="activityFeed" class="activity-list"></div>
-      </section>
-    </section>
-
-    <footer>
-      <span id="sourceLine">Источник: agent-status.json</span>
-      <span>Автономная разработка NRAV</span>
-    </footer>
+  <main>
+    <div class="brand">NRAV</div>
+    <div class="state"><span class="dot"></span> Остановлено владельцем</div>
+    <h1>Автономная работа приостановлена</h1>
+    <p>Агенты и автоматическое обновление Центра управления выключены. Работа продолжится только после отдельной ручной команды владельца.</p>
+    <div class="facts" aria-label="Состояние">
+      <div class="fact">Все 8 основных расписаний поставлены на паузу.</div>
+      <div class="fact">Новые автоматические запуски и чаты не создаются.</div>
+      <div class="fact">История, результаты и контрольные точки сохранены.</div>
+    </div>
+    <div class="note">Остановлено 30 сентября 2026 года. Доска работает только как статичное уведомление и не выполняет фоновые запросы.</div>
   </main>
-  <script type="module" src="./app.js?v=14"></script>
 </body>
 </html>
-
