@@ -1,0 +1,11 @@
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/filter-categories/*-card.webp
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/assets/filter-map-types/*-card.webp
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/push-sw.js
+  Cache-Control: no-cache

@@ -1,0 +1,102 @@
+1:"$Sreact.fragment"
+6:I[15841,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"VoicePlaybackProvider"]
+7:I[34180,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"GatewayAccessGate"]
+8:I[66058,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"AudioCallProvider"]
+9:I[5803,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"MainTabChromeProvider"]
+a:I[27178,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"RuntimeNavigationHost"]
+b:I[39756,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"default"]
+c:I[836,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/1235io0z7ser5.js"],"default"]
+d:I[37457,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"default"]
+e:I[22016,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0d5o~5f97xd9..js"],""]
+f:I[87986,["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js"],"PreviewUpdateNotice"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0mjvkw7ue-fd7.css","style"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0e9edj.8q965k.css","style"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/040_7ytp3cnt..css","style"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0w9h8xaj301ih.css","style"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/15ozqvlovrsi3.css","style"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0w12hl0uauky4.css","style"]
+:HL["/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sg742qby.lk-.css","style"]
+2:Td1a,
+(() => {
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches
+    || window.navigator.standalone === true;
+  const isIOSBrowser = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
+    || (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+  if (!isStandalone && !isIOSBrowser) return;
+
+  const property = "--nr-app-viewport-height";
+  const safeAreaProperty = "--nr-runtime-safe-area-bottom";
+  const root = document.documentElement;
+  let animationFrame = 0;
+  let settleTimer = 0;
+  let lateSettleTimer = 0;
+
+  const isEditableElementActive = () => {
+    const active = document.activeElement;
+    return active instanceof HTMLElement && (
+      active.isContentEditable
+      || active.matches("input, textarea, select")
+    );
+  };
+
+  const readViewportState = () => {
+    const layoutHeight = Math.max(window.innerHeight, root.clientHeight);
+    const viewport = window.visualViewport;
+    if (!viewport || viewport.height <= 0) return { height: Math.ceil(layoutHeight), keyboardRaised: false };
+
+    // In an installed iOS web app with viewport-fit=cover and a translucent
+    // status bar, VisualViewport can start below y=0. Its height alone then
+    // shortens the application shell and exposes a strip at the bottom. The
+    // visible bottom edge is height + offsetTop. Only an actually open keyboard
+    // is allowed to make the shell shorter than the layout viewport.
+    const visualBottom = viewport.height + Math.max(0, viewport.offsetTop);
+    const keyboardRaised = isEditableElementActive()
+      && layoutHeight - viewport.height > 120;
+    return {
+      // Safari may pan the visual viewport while focusing an input. The keyboard
+      // edge is then at offsetTop + height in layout coordinates, so anchoring
+      // the shell to height alone lifts the composer far above the keyboard.
+      height: Math.ceil(keyboardRaised ? visualBottom : Math.max(layoutHeight, visualBottom)),
+      keyboardRaised,
+    };
+  };
+
+  const commit = () => {
+    animationFrame = 0;
+    const state = readViewportState();
+    root.style.setProperty(property, state.height + "px");
+    if (state.keyboardRaised) root.style.setProperty(safeAreaProperty, "0px");
+    else root.style.removeProperty(safeAreaProperty);
+  };
+
+  const schedule = () => {
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    animationFrame = requestAnimationFrame(commit);
+  };
+
+  const scheduleSettledRead = () => {
+    schedule();
+    if (settleTimer) clearTimeout(settleTimer);
+    if (lateSettleTimer) clearTimeout(lateSettleTimer);
+    settleTimer = window.setTimeout(schedule, 320);
+    lateSettleTimer = window.setTimeout(schedule, 760);
+  };
+
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "visible") scheduleSettledRead();
+  };
+
+  commit();
+  window.addEventListener("resize", schedule);
+  window.addEventListener("orientationchange", scheduleSettledRead);
+  window.addEventListener("pageshow", scheduleSettledRead);
+  window.visualViewport?.addEventListener("resize", schedule);
+  window.visualViewport?.addEventListener("scroll", schedule);
+  document.addEventListener("focusin", scheduleSettledRead, true);
+  document.addEventListener("focusout", scheduleSettledRead, true);
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+})();
+0:{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0mjvkw7ue-fd7.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0e9edj.8q965k.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/040_7ytp3cnt..css","precedence":"next"}],["$","link","3",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0w9h8xaj301ih.css","precedence":"next"}],["$","link","4",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/15ozqvlovrsi3.css","precedence":"next"}],["$","link","5",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0w12hl0uauky4.css","precedence":"next"}],["$","link","6",{"rel":"stylesheet","href":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sg742qby.lk-.css","precedence":"next"}],["$","script","script-0",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/02~pw3_-3zfud.js","async":true}],["$","script","script-1",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/05nu6luq9zko1.js","async":true}],["$","script","script-2",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0ft3h~392j5w..js","async":true}],["$","script","script-3",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0sb52amfd7lfn.js","async":true}],["$","script","script-4",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/0am_acnn3a.d4.js","async":true}],["$","script","script-5",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/16u_c8.ike5hy.js","async":true}]],["$","html",null,{"lang":"ru","data-theme":"dark","children":["$","body",null,{"children":[["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}],"$L3","$L4","$L5"]}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"dgtwZRZcEMmxXvZTmzLqc"}
+3:["$","$L6",null,{"children":["$","main",null,{"className":"stage","children":["$","div",null,{"className":"phone","children":["$","$L7",null,{"children":["$","$L8",null,{"children":["$","$L9",null,{"children":["$","$La",null,{"children":["$","$Lb",null,{"parallelRouterKey":"children","error":"$c","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/NRAV-PWA/_versions/e4f6f5cc6616cf6d4aad77eb6a3e9adaa72d54b0/_next/static/chunks/1235io0z7ser5.js","async":true}]],"template":["$","$Ld",null,{}],"notFound":[["$","section",null,{"className":"screen dark-screen error-module__BggWjq__screen","children":["$","div",null,{"className":"error-module__BggWjq__content","children":[["$","h1",null,{"children":"Страница не найдена"}],["$","p",null,{"children":"Похоже, ссылка устарела или адрес набран неверно."}],["$","$Le",null,{"href":"/","children":"На главную"}]]}]}],[]]}]}]}]}]}]}]}]}]
+4:["$","$Lf",null,{}]
+5:["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n(() => {\n  const getOpenHeaderMenuTrigger = () => document.querySelector('button[aria-label^=\"Действия\"][aria-expanded=\"true\"]');\n  const closeOpenHeaderMenu = () => {\n    const trigger = getOpenHeaderMenuTrigger();\n    if (trigger instanceof HTMLElement) trigger.click();\n  };\n\n  document.addEventListener('pointerdown', (event) => {\n    const trigger = getOpenHeaderMenuTrigger();\n    if (!(trigger instanceof HTMLElement)) return;\n    const target = event.target;\n    if (target instanceof Element && target.closest('button[aria-label^=\"Действия\"], [role=\"menu\"]')) return;\n    closeOpenHeaderMenu();\n  }, true);\n\n  document.addEventListener('scroll', () => closeOpenHeaderMenu(), true);\n})();\n"}}]

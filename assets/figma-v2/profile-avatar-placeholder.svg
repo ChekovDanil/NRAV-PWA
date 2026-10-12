@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Фото профиля не добавлено">
+  <rect width="128" height="128" rx="64" fill="#252525"/>
+  <g fill="none" stroke="#929292" stroke-width="2.5" stroke-linecap="round">
+    <circle cx="64" cy="46" r="17"/>
+    <path d="M33 99v-5c0-14 13-24 31-24s31 10 31 24v5"/>
+  </g>
+</svg>

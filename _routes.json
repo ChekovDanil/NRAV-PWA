@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "include": [
+    "/api/nrav/*",
+    "/profiles/*",
+    "/events/*",
+    "/conversations/*",
+    "/groups/*",
+    "/channels/*",
+    "/notes/*"
+  ],
+  "exclude": ["/_next/*", "/NRAV-PWA/assets/*"]
+}
